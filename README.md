@@ -1,6 +1,9 @@
 # anthropomorphic-hand
 Description how to set up the Arduino and the Adafruit motorboard.
 
+# Install the Arduino Software
+
+Download the latest software at https://www.arduino.cc/en/Main/Software and install it.
  
 # Adafruit 16-Channel Servo Driver with Arduino
 
