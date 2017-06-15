@@ -3,7 +3,7 @@ Description how to set up the Arduino and the Adafruit motorboard.
 
 # Install the Arduino Software
 
-Download the latest software at https://www.arduino.cc/en/Main/Software and install it.
+Download the latest software at https://www.arduino.cc/en/Main/Software and install it. Connect your Microcontroller to your computer, choose the right port (tools - port) and the right board (tools - board). 
  
 # Adafruit 16-Channel Servo Driver with Arduino
 
@@ -20,6 +20,11 @@ servos.
 # Hooking it Up: Connecting the motorboard to the Arduino
 
 The PWM/Servo Driver uses I2C so it take only 4 wires to connect to your Arduino:
+## Genuino 101
++5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
+GND -> GND
+SDA -> SDA
+SCL -> SCL
 ## "Classic" Arduino wiring:
 +5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
 GND -> GND
