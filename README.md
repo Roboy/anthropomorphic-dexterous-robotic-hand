@@ -35,8 +35,14 @@ Open the LED blink example sketch: File > Sketchbook > Examples > led_blink.
 Select the serial device of the Arduino board from the Tools | Serial Port menu. On Windows, this should be COM1 or COM2 for a serial Arduino board, or COM3, COM4, or COM5 for a USB board. On the Mac, this should be something like /dev/cu.usbserial-1B1 for a USB board, or something like /dev/cu.USA19QW1b1P1.1 if using a Keyspan adapter with a serial board (other USB-to-serial adapters use different names).
 
 If the Arduino board doesn't show up in the Tools | Serial Port menu, or you get an error while uploading, please see the FAQ for troubleshooting suggestions.
+
  
-# Adafruit 16-Channel Servo Driver with Arduino
+ ## Read more about the Arduino IDE
+
+https://www.arduino.cc/en/Guide/Environment?from=Main.Environment
+
+ 
+# Adafruit 16-Channel Servo Driver with Arduino / Hooking it Up: Connecting the motorboard to the Arduino
 
 Driving servo motors with the Arduino Servo library is pretty easy, but each one consumes a
 precious pin - not to mention some Arduino processing power. The Adafruit 16-Channel 12-bit
@@ -47,29 +53,23 @@ same 2 pins!
 The Adafruit PWM/Servo Driver is the perfect solution for any project that requires a lot of
 servos.
 
-# Read more about the Arduino IDE
-
-https://www.arduino.cc/en/Guide/Environment?from=Main.Environment
-
-# Hooking it Up: Connecting the motorboard to the Arduino
-
 The PWM/Servo Driver uses I2C so it take only 4 wires to connect to your Arduino:
-## Genuino 101
+### Genuino 101
 +5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
 GND -> GND
 SDA -> SDA
 SCL -> SCL
-## "Classic" Arduino wiring:
+### "Classic" Arduino wiring:
 +5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
 GND -> GND
 Analog 4 -> SDA
 Analog 5 -> SCL
-## Older Mega wiring:
+### Older Mega wiring:
 +5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
 GND -> GND
 Digital 20 -> SDA
 Digital 21 -> SCL
-## R3 and later Arduino wiring (Uno, Mega & Leonardo):
+### R3 and later Arduino wiring (Uno, Mega & Leonardo):
 (These boards have dedicated SDA & SCL pins on the header nearest the USB connector)
 +5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
 GND -> GND
@@ -82,7 +82,7 @@ V+ pins, you MUST connect the V+ pin as well. The V+ pin can be as high as 6V ev
 is polarity protected.
 
 
-# Power for the Servos
+## Power for the Servos
 
 Most servos are designed to run on about 5 or 6v. Keep in mind that a lot of servos moving at
 the same time (particularly large powerful ones) will need a lot of current. Even micro servos
@@ -99,7 +99,7 @@ It is not a good idea to use the Arduino 5v pin to power your servos. Electrical
 overheat.
 We use the following power for 25 servos: 5A, 10A (https://www.amazon.de/gp/product/B00KETLBAU/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
 
-# Connecting a Servo
+## Connecting a Servo
 
 We use the SG90 TowerPro Servos (http://www.micropik.com/PDF/SG90Servo.pdf).
 Most servos come with a standard 3-pin female connector that will plug directly into the headers
@@ -110,7 +110,7 @@ Up to 16 servos can be attached to one board. If you need to control more than 1
 additional boards can be chained.
 
 
-# Adressing the board
+## Adressing the board
 
 Each board in the chain must be assigned a unique address. This is done with the address
 jumpers on the upper right edge of the board. The I2C base address for each board is 0x40.
