@@ -1,9 +1,9 @@
 # anthropomorphic-hand
-Description how to set up the Arduino and the Adafruit motorboard.
+This repo contains design files for fusion 360 as well as a descritpion  how to set up the Arduino and the Adafruit motorboard for the hand.
 
 # Install the Arduino Software
 
-Download the latest software at https://www.arduino.cc/en/Main/Software and install it. Connect your Microcontroller to your computer, choose the right port (tools - port) and the right board (tools - board). 
+Download the latest software at https://www.arduino.cc/en/Main/Software and install it. Connect your Microcontroller to your computer, choose the right port (tools - port) and the right board (tools - board. In our case: Genuino 101). 
  
 # Adafruit 16-Channel Servo Driver with Arduino
 
@@ -63,10 +63,11 @@ rechargeable cells.
 It is not a good idea to use the Arduino 5v pin to power your servos. Electrical noise and
 'brownouts' from excess current draw can cause your Arduino to act erratically, reset and/or
 overheat.
-
+We use the following power for 25 servos: 5A, 10A (https://www.amazon.de/gp/product/B00KETLBAU/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
 
 # Connecting a Servo
 
+We use the SG90 TowerPro Servos (http://www.micropik.com/PDF/SG90Servo.pdf).
 Most servos come with a standard 3-pin female connector that will plug directly into the headers
 on the Servo Driver. Be sure to align the plug with the ground wire (usually black or brown) with
 the bottom row and the signal wire (usually yellow or white) on the top.
