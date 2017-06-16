@@ -3,7 +3,38 @@ This repo contains design files for fusion 360 as well as a descritpion  how to 
 
 # Install the Arduino Software
 
-Download the latest software at https://www.arduino.cc/en/Main/Software and install it. Connect your Microcontroller to your computer, choose the right port (tools - port) and the right board (tools - board. In our case: Genuino 101). 
+To program the Arduino board you need the Arduino environment.
+Download Arduino: From the software page. (https://www.arduino.cc/en/Main/Software)
+
+Linux note: For help getting the Arduino IDE running on Debian, please see the FAQ ("How can I run the Arduino IDE under Linux?").
+
+Mac OS X note: After downloading the IDE, run the macosx_setup.command. It corrects permission on a few files for use with the serial port and will prompt you for your password. You may need to reboot after running this script.
+
+## Instal the USB drivers
+
+If you are using a USB Arduino, you will need to install the drivers for the FTDI chip on the board. These can be found in the drivers directory of the Arduino distribution.
+
+On Windows, you will need to unzip FTDI USB Drivers.zip. Then, when you plug in the Arduino board, point the Windows Add Hardware wizard to the FTDI USB Drivers directory.
+
+On the Mac, mount the FTDIUSBSerialDriver_v2_1_6.dmg (on PPC machines) or the FTDIUSBSerialDriver_v2_2_6_Intel.dmg (on Intel machines) disk image and run the included FTDIUSBSerialDriver.pkg.
+
+## Connect the board
+
+See also instruction here: https://www.arduino.cc/en/main/howto
+
+If you're using a serial board, power the board with an external power supply (6 to 25 volts DC, with the core of the connector positive). Connect the board to a serial port on your computer.
+
+On the USB boards, the power source is selected by the jumper between the USB and power plugs. To power the board from the USB port (good for controlling low power devices like LEDs), place the jumper on the two pins closest to the USB plug. To power the board from an external power supply (needed for motors and other high current devices), place the jumper on the two pins closest to the power plug. Either way, connect the board to a USB port on your computer. On Windows, the Add New Hardware wizard will open; tell it you want to specify the location to search for drivers and point to the folder containing the USB drivers you unzipped in the previous step.
+
+The power LED should go on.
+
+## Upload a program for testing
+
+Open the LED blink example sketch: File > Sketchbook > Examples > led_blink.
+
+Select the serial device of the Arduino board from the Tools | Serial Port menu. On Windows, this should be COM1 or COM2 for a serial Arduino board, or COM3, COM4, or COM5 for a USB board. On the Mac, this should be something like /dev/cu.usbserial-1B1 for a USB board, or something like /dev/cu.USA19QW1b1P1.1 if using a Keyspan adapter with a serial board (other USB-to-serial adapters use different names).
+
+If the Arduino board doesn't show up in the Tools | Serial Port menu, or you get an error while uploading, please see the FAQ for troubleshooting suggestions.
  
 # Adafruit 16-Channel Servo Driver with Arduino
 
@@ -16,6 +47,9 @@ same 2 pins!
 The Adafruit PWM/Servo Driver is the perfect solution for any project that requires a lot of
 servos.
 
+# Read more about the Arduino IDE
+
+https://www.arduino.cc/en/Guide/Environment?from=Main.Environment
 
 # Hooking it Up: Connecting the motorboard to the Arduino
 
@@ -175,3 +209,21 @@ position and SERVOMAX to the 180 degree position, you can convert any angle betw
 180 degrees to the corresponding pulse length with the following line of code:
 pulselength = map(degrees, 0, 180, SERVOMIN, SERVOMAX);
 
+# Upload the Code
+
+Upload the Code for the movement of the 5 Fingers: "first_prototype_5fingers.ino" to the Arduino. 
+
+### Verify/Compile 
+Checks your sketch for errors compiling it; it will report memory usage for code and variables in the console area.
+### Upload 
+Compiles and loads the binary file onto the configured board through the configured Port.
+### Upload Using Programmer 
+This will overwrite the bootloader on the board; you will need to use Tools > Burn Bootloader to restore it and be able to Upload to USB serial port again. However, it allows you to use the full capacity of the Flash memory for your sketch. Please note that this command will NOT burn the fuses. To do so a Tools -> Burn Bootloader command must be executed.
+### Export Compiled Binary 
+Saves a .hex file that may be kept as archive or sent to the board using other tools.
+### Show Sketch Folder 
+Opens the current sketch folder.
+### Include Library 
+Adds a library to your sketch by inserting #include statements at the start of your code. For more details, see libraries below. Additionally, from this menu item you can access the Library Manager and import new libraries from .zip files.
+### Add File... 
+Adds a source file to the sketch (it will be copied from its current location). The new file appears in a new tab in the sketch window. Files can be removed from the sketch using the tab menu accessible clicking on the small triangle icon below the serial monitor one on the right side o the toolbar.
