@@ -10,7 +10,7 @@ Linux note: For help getting the Arduino IDE running on Debian, please see the F
 
 Mac OS X note: After downloading the IDE, run the macosx_setup.command. It corrects permission on a few files for use with the serial port and will prompt you for your password. You may need to reboot after running this script.
 
-## Instal the USB drivers
+## Install the USB drivers
 
 If you are using a USB Arduino, you will need to install the drivers for the FTDI chip on the board. These can be found in the drivers directory of the Arduino distribution.
 
