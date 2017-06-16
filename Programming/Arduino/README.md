@@ -1,3 +1,10 @@
+# anthropomorphic-hand
+This repo contains design files for fusion 360 as well as a descritpion  how to set up the Arduino and the Adafruit motorboard for the hand.
+
+# Install the Arduino Software
+
+Download the latest software at https://www.arduino.cc/en/Main/Software and install it. Connect your Microcontroller to your computer, choose the right port (tools - port) and the right board (tools - board. In our case: Genuino 101). 
+ 
 # Adafruit 16-Channel Servo Driver with Arduino
 
 Driving servo motors with the Arduino Servo library is pretty easy, but each one consumes a
@@ -13,6 +20,11 @@ servos.
 # Hooking it Up: Connecting the motorboard to the Arduino
 
 The PWM/Servo Driver uses I2C so it take only 4 wires to connect to your Arduino:
+## Genuino 101
++5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
+GND -> GND
+SDA -> SDA
+SCL -> SCL
 ## "Classic" Arduino wiring:
 +5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
 GND -> GND
@@ -51,10 +63,11 @@ rechargeable cells.
 It is not a good idea to use the Arduino 5v pin to power your servos. Electrical noise and
 'brownouts' from excess current draw can cause your Arduino to act erratically, reset and/or
 overheat.
-
+We use the following power for 25 servos: 5A, 10A (https://www.amazon.de/gp/product/B00KETLBAU/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
 
 # Connecting a Servo
 
+We use the SG90 TowerPro Servos (http://www.micropik.com/PDF/SG90Servo.pdf).
 Most servos come with a standard 3-pin female connector that will plug directly into the headers
 on the Servo Driver. Be sure to align the plug with the ground wire (usually black or brown) with
 the bottom row and the signal wire (usually yellow or white) on the top.
@@ -142,7 +155,7 @@ Servo pulse timing varies between different brands and models. Since it is an an
 circuit, there is often some variation between samples of the same brand and model. For
 precise position control, you will want to calibrate the minumum and maximum pulse-widths in
 your code to match known positions of the servo.
-## Find the MInimum:
+## Find the Minimum:
 Using the example code, edit SERVOMIN until the low-point of the sweep reaches the minimum
 range of travel. It is best to approach this gradually and stop before the physical limit of travel is
 reached.
