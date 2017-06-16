@@ -1,5 +1,5 @@
 # anthropomorphic-hand
-This repo contains design files for fusion 360 as well as a descritpion  how to set up the Arduino and the Adafruit motorboard for the hand.
+This repo contains design files for fusion 360 as well as a description how to set up the Arduino and the Adafruit motorboard for the hand.
 
 # Install the Arduino Software
 
