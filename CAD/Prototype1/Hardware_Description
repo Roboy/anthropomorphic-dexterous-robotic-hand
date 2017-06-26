@@ -1,0 +1,9 @@
+## Hardware
+For the prototype1 the following hardware is used:
+- Robotic hand (3D printed)
+- Genuino 101 (power supply via laptop)
+- 2 Adafruit 16-Channel 12-bit PWM Servo Driver, 
+- A power supply (5V, 10A) for the motorboards
+- 25 servos (TowerPro, Micro Servo SG90).
+
+See also: https://devanthro.atlassian.net/wiki/display/R2M/Roboy+hand
