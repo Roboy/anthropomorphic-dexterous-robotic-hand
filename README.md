@@ -1,7 +1,18 @@
-# anthropomorphic-hand
-This repo contains design files for fusion 360 as well as a description how to set up the Arduino and the Adafruit motorboard for the hand.
+# anthropomorphic-hand-prototype1
+This repo contains design files for fusion 360 as well as a description how to set up the Arduino and the Adafruit motorboard for the hand (prototype1).
 
-# Install the Arduino Software
+## Hardware
+For the prototype1 the following hardware is used:
+- Robotic hand (3D printed)
+- Genuino 101 (power supply via laptop)
+- 2 Adafruit 16-Channel 12-bit PWM Servo Driver, 
+- A power supply (5V, 10A) for the motorboards
+- 25 servos (TowerPro, Micro Servo SG90).
+
+# Building from source
+The following instructions guide you through the process of building this repo from source.
+
+## Install the Arduino Software
 
 To program the Arduino board you need the Arduino environment.
 Download Arduino: From the software page. (https://www.arduino.cc/en/Main/Software)
@@ -10,7 +21,7 @@ Linux note: For help getting the Arduino IDE running on Debian, please see the F
 
 Mac OS X note: After downloading the IDE, run the macosx_setup.command. It corrects permission on a few files for use with the serial port and will prompt you for your password. You may need to reboot after running this script.
 
-## Install the USB drivers
+### Install the USB drivers
 
 If you are using a USB Arduino, you will need to install the drivers for the FTDI chip on the board. These can be found in the drivers directory of the Arduino distribution.
 
@@ -28,7 +39,7 @@ On the USB boards, the power source is selected by the jumper between the USB an
 
 The power LED should go on.
 
-## Upload a program for testing
+### Upload a program for testing (not mandatory)
 
 Open the LED blink example sketch: File > Sketchbook > Examples > led_blink.
 
@@ -39,6 +50,7 @@ If the Arduino board doesn't show up in the Tools | Serial Port menu, or you get
  
  ## Read more about the Arduino IDE
 
+In case of troubleshooting
 https://www.arduino.cc/en/Guide/Environment?from=Main.Environment
 
  
@@ -162,21 +174,11 @@ You may need to create the libraries subfolder if its your first library. Restar
 We also have a great tutorial on Arduino library installation at:
 http://learn.adafruit.com/adafruit-all-about-arduino-libraries-install-use (http://adafru.it/aYM)
 
-## Test with the Example Code:
+### Test with the Example Code: (not mandatory)
 
 First make sure all copies of the Arduino IDE are closed.
 Next open the Arduino IDE and select File->Examples->Adafruit_PWMServoDriver->Servo.
 This will open the example file in an IDE window.
-
-### If using a Breakout:
-Connect the driver board and servo as shown on the previous page. Don't forget to provide
-power to both Vin (3-5V logic level) and V+ (5V servo power). Check the green LED is lit!
-### If using a Shield:
-Plug the shield into your Arduino. Don't forget you will also have to provide 5V to the V+ terminal
-block. Both red and green LEDs must be lit.
-### If using a FeatherWing:
-Plug the FeatherWing into your Feather. Don't forget you will also have to provide 5V to the V+
-terminal block. Check the green LED is lit!
 
 # Connect a Servo
 
