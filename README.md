@@ -1,4 +1,4 @@
-# anthropomorphic-hand-prototype1
+# anthropomorphic-hand
 This repo contains design files for fusion 360 as well as a description how to set up the robotic hand (prototype1 & 2).
 
 ## Prototype 1
