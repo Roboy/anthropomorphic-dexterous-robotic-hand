@@ -17,3 +17,4 @@ The Prototype 2 will be develop to adapt it onto Roboy 2.0. The servo motors wil
 - The documentation of the Prototype 2 can be found here: https://devanthro.atlassian.net/wiki/display/R2M/Anthropomorphic+hand+for+Roboy
 - The CAD files of the Prototype 2 can be found here: https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/tree/master/CAD/Prototype2
 - The documentation of the coding can be found here: https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/tree/master/Programming/Prototype2
+
