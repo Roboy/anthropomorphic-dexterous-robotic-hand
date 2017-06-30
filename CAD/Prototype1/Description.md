@@ -7,7 +7,7 @@
 
 ### Software constraints
 - The CAD files were developed on Windows 8, there Autodesk Fusion 360 runs for sure.
-- Well established within the Roboy Mechatronics Team.
+- Fusion 360 is well established within the Roboy Mechatronics Team.
 
 ## Hardware
 For the prototype1 the following hardware is used:
