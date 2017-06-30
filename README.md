@@ -30,3 +30,10 @@ The prototype 2 is being developed (June 2017) with the whole Roboy team so that
 - The CAD files of the Prototype 2 can be found here: https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/tree/master/CAD/Prototype2
 - The documentation of the coding can be found here: https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/tree/master/Programming/Prototype2
 
+### Pictures of the prototype 1 & 2
+
+#### Prototype 1
+![prototype1a](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/prototype1a.jpg?raw=true)
+
+#### Prototype 2
+![prototype2](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/prototype2.jpg?raw=true)
