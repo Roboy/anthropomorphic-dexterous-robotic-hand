@@ -4,6 +4,6 @@ For the prototype1 the following hardware is used:
 - Genuino 101 (power supply via laptop)
 - 2 Adafruit 16-Channel 12-bit PWM Servo Driver, 
 - A power supply (5V, 10A) for the motorboards
-- 25 servos (TowerPro, Micro Servo SG90).
+- 20 servo motors: Hitec Midi-Servo HS-81 Analog-Servo
 
-See also: https://devanthro.atlassian.net/wiki/display/R2M/Roboy+hand
+See also the documentation: https://devanthro.atlassian.net/wiki/display/R2M/Roboy+hand
