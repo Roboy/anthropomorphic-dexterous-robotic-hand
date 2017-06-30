@@ -1,6 +1,10 @@
 # anthropomorphic-hand-prototype1
 This repo contains design files for fusion 360 as well as a description how to set up the Arduino and the Adafruit motorboard for the hand (prototype1).
 
+The documentation of the Prototype 1 can be found here: https://devanthro.atlassian.net/wiki/display/R2M/Anthropomorphic+hand+for+Roboy
+
+![prototype1a](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/prototype1a.jpg?raw=true)
+
 ## Hardware
 For the prototype1 the following hardware is used:
 - Robotic hand (3D printed)
@@ -134,23 +138,20 @@ Adafruit_PWMServoDriver folder contains Adafruit_PWMServoDriver.cpp and
 Adafruit_PWMServoDriver.h
 Place the Adafruit_PWMServoDriver library folder your arduinosketchfolder/libraries/ folder.
 You may need to create the libraries subfolder if its your first library. Restart the IDE.
-We also have a great tutorial on Arduino library installation at:
+There is also a great tutorial on how to install the library:
 http://learn.adafruit.com/adafruit-all-about-arduino-libraries-install-use (http://adafru.it/aYM)
 
-
 # Upload the Code
-
 Upload the Code for the movement of the 5 Fingers: "first_prototype_5fingers.ino" to the Arduino. 
+https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Programming/Prototype1/first_prototype_5fingers.ino
 
 ### Verify/Compile 
 Checks your sketch for errors compiling it; it will report memory usage for code and variables in the console area.
 ### Upload 
 Compiles and loads the binary file onto the configured board through the configured Port.
-### Upload Using Programmer 
-This will overwrite the bootloader on the board; you will need to use Tools > Burn Bootloader to restore it and be able to Upload to USB serial port again. However, it allows you to use the full capacity of the Flash memory for your sketch. Please note that this command will NOT burn the fuses. To do so a Tools -> Burn Bootloader command must be executed.
-### Export Compiled Binary 
-Saves a .hex file that may be kept as archive or sent to the board using other tools.
-### Show Sketch Folder 
-Opens the current sketch folder.
-### Include Library 
-Adds a library to your sketch by inserting #include statements at the start of your code. For more details, see libraries below. Additionally, from this menu item you can access the Library Manager and import new libraries from .zip files.
+
+
+# Experimental setup
+In the picture below you can see the experimental setup of the prototype 1. Further description of the experimental setup can be found on the following link: https://devanthro.atlassian.net/wiki/display/R2M/Anthropomorphic+hand+for+Roboy
+
+![prototype1](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/prototype1.jpg?raw=true)
