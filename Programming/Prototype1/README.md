@@ -37,7 +37,8 @@ In case of troubleshooting
 https://www.arduino.cc/en/Guide/Environment?from=Main.Environment
 
  
-# Adafruit 16-Channel Servo Driver with Arduino / Hooking it Up: Connecting the motorboard to the Arduino
+# Adafruit 16-Channel Servo Driver with Arduino
+## Hooking it Up: Connecting the motorboard to the Arduino
 
 Driving servo motors with the Arduino Servo library is pretty easy, but each one consumes a
 precious pin - not to mention some Arduino processing power. The Adafruit 16-Channel 12-bit
@@ -94,53 +95,32 @@ It is not a good idea to use the Arduino 5v pin to power your servos. Electrical
 overheat.
 We use the following power for 25 servos: 5A, 10A (https://www.amazon.de/gp/product/B00KETLBAU/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
 
-## Connecting a Servo
+## Connecting a Servo motor
 
 We use the SG90 TowerPro Servos (http://www.micropik.com/PDF/SG90Servo.pdf).
 Most servos come with a standard 3-pin female connector that will plug directly into the headers
 on the Servo Driver. Be sure to align the plug with the ground wire (usually black or brown) with
 the bottom row and the signal wire (usually yellow or white) on the top.
 
-Up to 16 servos can be attached to one board. If you need to control more than 16 servos,
-additional boards can be chained.
+A single servo should be plugged into the PWM #0 port, the first port. You should see the servo
+sweep back and forth over approximately 180 degrees. 
 
+![connecting to Arduino_Uno](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/connecting%20to%20Arduino_Uno.JPG?raw=true)
 
-## Adressing the board
+Up to 16 servos can be attached to one board.
 
-Each board in the chain must be assigned a unique address. This is done with the address
-jumpers on the upper right edge of the board. The I2C base address for each board is 0x40.
-The binary address that you program with the address jumpers is added to the base I2C
-address.
-To program the address offset, use a drop of solder to bridge the corresponding address jumper
-for each binary '1' in the address.
+![Adding more servos](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/Adding%20more%20servos.JPG?raw=true)
 
-Board 0: Address = 0x40 Offset = binary 00000 (no jumpers required)
-Board 1: Address = 0x41 Offset = binary 00001 (bridge A0 as in the photo above)
-Board 2: Address = 0x42 Offset = binary 00010 (bridge A1)
-Board 3: Address = 0x43 Offset = binary 00011 (bridge A0 & A1)
-Board 4: Address = 0x44 Offset = binary 00100 (bridge A2)
-etc.
+## Chaining drivers
+Multiple Drivers (up to 62) can be chained to control still more servos. With headers at both
+ends of the board, the wiring is as simple as connecting a 6-pin parallel
+cable (http://adafru.it/206) from one board to the next. In our case we use 2 motor boards for controlling 25 servo motors. 
 
-In your sketch, you'll need to declare a separate pobject for each board. Call begin on each
-object, and control each servo through the object it's attached to. For example:
-
-#include <Wire.h>
-#include <Adafruit_PWMServoDriver.h>
-Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40);
-Adafruit_PWMServoDriver pwm2 = Adafruit_PWMServoDriver(0x41);
-void setup() {
-Serial.begin(9600);
-Serial.println("16 channel PWM test!");
-pwm1.begin();
-pwm1.setPWMFreq(1600); // This is the maximum PWM frequency
-pwm2.begin();
-pwm2.setPWMFreq(1600); // This is the maximum PWM frequency}
-
+![Chaining Drivers](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/Chaining%20Drivers.JPG?raw=true)
 
 # Using the Adafruit Library
 
-Since the PWM Servo Driver is controlled over I2C, its super easy to use with any
-microcontroller or microcomputer. 
+Since the PWM Servo Driver is controlled over I2C, its super easy to use with any microcontroller or microcomputer. 
 
 ## Download the library from Github
 
@@ -156,12 +136,6 @@ Place the Adafruit_PWMServoDriver library folder your arduinosketchfolder/librar
 You may need to create the libraries subfolder if its your first library. Restart the IDE.
 We also have a great tutorial on Arduino library installation at:
 http://learn.adafruit.com/adafruit-all-about-arduino-libraries-install-use (http://adafru.it/aYM)
-
-
-# Connect a Servo
-
-A single servo should be plugged into the PWM #0 port, the first port. You should see the servo
-sweep back and forth over approximately 180 degrees. 
 
 
 # Upload the Code
