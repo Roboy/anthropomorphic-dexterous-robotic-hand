@@ -8,7 +8,6 @@ The documentation of the Prototype 1 can be found here: https://devanthro.atlass
 ## Hardware
 For the prototype1 the following hardware is used:
 ```
-#!bash
 - Robotic hand (3D printed)
 - Genuino 101 (power supply via laptop)
 - 2 Adafruit 16-Channel 12-bit PWM Servo Driver, 
@@ -57,7 +56,6 @@ servos.
 
 The PWM/Servo Driver uses I2C so it take only 4 wires to connect to your Arduino:
 ```
-#!bash
 ### Genuino 101
 +5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
 GND -> GND
@@ -132,7 +130,6 @@ Since the PWM Servo Driver is controlled over I2C, its super easy to use with an
 
 ## Download the library from Github
 ```
-#!bash
 Start by downloading the library from the GitHub repository (http://adafru.it/aQl) You can do that
 by visiting the github repo and manually downloading or, easier, just click this button to
 download the zip
@@ -148,7 +145,6 @@ http://learn.adafruit.com/adafruit-all-about-arduino-libraries-install-use (http
 ```
 # Upload the Code
 ```
-#!bash
 Upload the Code for the movement of the 5 Fingers: "first_prototype_5fingers.ino" to the Arduino. 
 https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Programming/Prototype1/first_prototype_5fingers.ino
 ```
