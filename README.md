@@ -14,7 +14,7 @@ Another servo motor (with more power) has to be selected to increase the grippin
 To control the wrist a sensor system is necessary (sensor angle measurement).
 
 ### Prototype 1
-The prototype 1 was developed independently from Roboy to test the hand with the servo system driven by 25 motors and the design of five tendon driven fingers.
+The prototype 1 was developed independently from Roboy to test the design of five tendon driven fingers with the servo system driven by 25 motors. 
 
 #### Useful links
 - The documentation of the Prototype 1 can be found here: https://devanthro.atlassian.net/wiki/display/R2M/Anthropomorphic+hand+for+Roboy
@@ -23,7 +23,7 @@ The prototype 1 was developed independently from Roboy to test the hand with the
 
 
 ### Prototype 2
-The prototype 2 is being developed (June 2017) with the whole Roboy team so that it can be adapted into Roboy 2.0. The prototype 2 has 20 servo motors which will be integrated in Roboy´s new arm (Documentation: https://devanthro.atlassian.net/wiki/display/R2M/Arms). The new design of Roboy´s hand will be more humanlike and a wrist will also be developed. The new tendon routing is improving the precision from the old robotic hand. Furthermore, a sensor system on the wrist will be implemented.
+The prototype 2 is being developed (June 2017) so that it can be adapted into Roboy 2.0. The prototype 2 has 20 servo motors which will be integrated in Roboy´s new arm (Documentation: https://devanthro.atlassian.net/wiki/display/R2M/Arms). The new design of Roboy´s hand will be more humanlike and an additional wrist will be developed. The new tendon routing is improving the precision in comparison to the old robotic hand. Furthermore, a sensor system on the wrist will be implemented.
 
 #### Useful links
 - The documentation of the Prototype 2 can be found here: https://devanthro.atlassian.net/wiki/display/R2M/Anthropomorphic+hand+for+Roboy
