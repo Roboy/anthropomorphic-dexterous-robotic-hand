@@ -7,12 +7,14 @@ The documentation of the Prototype 1 can be found here: https://devanthro.atlass
 
 ## Hardware
 For the prototype1 the following hardware is used:
+```
+#!bash
 - Robotic hand (3D printed)
 - Genuino 101 (power supply via laptop)
 - 2 Adafruit 16-Channel 12-bit PWM Servo Driver, 
 - A power supply (5V, 10A) for the motorboards
 - 25 servos (TowerPro, Micro Servo SG90).
-
+```
 # Building from source
 The following instructions guide you through the process of building this repo from source.
 
@@ -54,6 +56,8 @@ The Adafruit PWM/Servo Driver is the perfect solution for any project that requi
 servos.
 
 The PWM/Servo Driver uses I2C so it take only 4 wires to connect to your Arduino:
+```
+#!bash
 ### Genuino 101
 +5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
 GND -> GND
@@ -75,7 +79,7 @@ Digital 21 -> SCL
 GND -> GND
 SDA -> SDA
 SCL -> SCL
-
+```
 The VCC pin is just power for the chip itself. If you want to connect servos or LEDs that use the
 V+ pins, you MUST connect the V+ pin as well. The V+ pin can be as high as 6V even if VCC is
 3.3V (the chip is 5V safe). We suggest connecting power through the blue terminal block since it
@@ -127,7 +131,8 @@ cable (http://adafru.it/206) from one board to the next. In our case we use 2 mo
 Since the PWM Servo Driver is controlled over I2C, its super easy to use with any microcontroller or microcomputer. 
 
 ## Download the library from Github
-
+```
+#!bash
 Start by downloading the library from the GitHub repository (http://adafru.it/aQl) You can do that
 by visiting the github repo and manually downloading or, easier, just click this button to
 download the zip
@@ -140,11 +145,13 @@ Place the Adafruit_PWMServoDriver library folder your arduinosketchfolder/librar
 You may need to create the libraries subfolder if its your first library. Restart the IDE.
 There is also a great tutorial on how to install the library:
 http://learn.adafruit.com/adafruit-all-about-arduino-libraries-install-use (http://adafru.it/aYM)
-
+```
 # Upload the Code
+```
+#!bash
 Upload the Code for the movement of the 5 Fingers: "first_prototype_5fingers.ino" to the Arduino. 
 https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Programming/Prototype1/first_prototype_5fingers.ino
-
+```
 ### Verify/Compile 
 Checks your sketch for errors compiling it; it will report memory usage for code and variables in the console area.
 ### Upload 
