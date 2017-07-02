@@ -136,7 +136,7 @@ cable (http://adafru.it/206) from one board to the next. In our case we use 2 mo
 Since the PWM Servo Driver is controlled over I2C, its super easy to use with any microcontroller or microcomputer. 
 
 ## Download the library from Github
-```
+
 Start by downloading the library from the GitHub repository (http://adafru.it/aQl) You can do that
 by visiting the github repo and manually downloading or, easier, just click this button to
 download the zip
@@ -149,12 +149,11 @@ Place the Adafruit_PWMServoDriver library folder your arduinosketchfolder/librar
 You may need to create the libraries subfolder if its your first library. Restart the IDE.
 There is also a great tutorial on how to install the library:
 http://learn.adafruit.com/adafruit-all-about-arduino-libraries-install-use (http://adafru.it/aYM)
-```
+
 # Upload the Code
-```
 Upload the Code for the movement of the 5 Fingers: "first_prototype_5fingers.ino" to the Arduino. 
 https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Programming/Prototype1/first_prototype_5fingers.ino
-```
+
 ### Verify/Compile 
 Checks your sketch for errors compiling it; it will report memory usage for code and variables in the console area.
 ### Upload 
