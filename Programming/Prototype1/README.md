@@ -55,23 +55,30 @@ The Adafruit PWM/Servo Driver is the perfect solution for any project that requi
 servos.
 
 The PWM/Servo Driver uses I2C so it take only 4 wires to connect to your Arduino:
-```
+
 ### Genuino 101
+```
 +5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
 GND -> GND
 SDA -> SDA
 SCL -> SCL
+```
 ### "Classic" Arduino wiring:
+```
 +5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
 GND -> GND
 Analog 4 -> SDA
 Analog 5 -> SCL
+```
 ### Older Mega wiring:
+```
 +5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
 GND -> GND
 Digital 20 -> SDA
 Digital 21 -> SCL
+```
 ### R3 and later Arduino wiring (Uno, Mega & Leonardo):
+```
 (These boards have dedicated SDA & SCL pins on the header nearest the USB connector)
 +5v -> VCC (this is power for the BREAKOUT only, NOT the servo power!)
 GND -> GND
