@@ -12,6 +12,7 @@ For the prototype1 the following hardware is used:
 - Genuino 101 (power supply via laptop)
 - 2 Adafruit 16-Channel 12-bit PWM Servo Driver, 
 - A power supply (5V, 10A) for the motorboards
+- DC jack 2,1 x 5,5 mm adapter with screw terminal for the power supply﻿
 - 25 servos (TowerPro, Micro Servo SG90).
 ```
 # Building from source
