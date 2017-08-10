@@ -1,0 +1,93 @@
+#include <Wire.h>
+#include <Adafruit_PWMServoDriver.h>
+
+//600 is the 'maximum' pulse length count (out of 4096)
+int wrist_fe = 410; // movement of the wrist from flexion to extension
+int wrist_ef = 410; // movement of the wrist from flexion to extension
+
+
+////////////////////////////////////////////////////////
+///////////////////    CONSTANTS    ///////////////////
+////////////////////////////////////////////////////////
+const int SERVOMIN = 180; // this value depends on the adjustment of the servos
+const int SERVOMAX = 410; // this value depends on the adjustment of the servos
+const int SCHRITTWEITE = 10; // setting up the step size of the servos
+//pulselength = map(degrees, 0, 180, SERVOMIN, SERVOMAX);
+
+// There are two different adresses for the two Adafruit motor boards: pwm & pwm2
+Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40); // motor board 1 mit Servos von 11 - 35
+Adafruit_PWMServoDriver pwm2 = Adafruit_PWMServoDriver(0x41); // motor board 1 mit Servos von 41 - 55
+
+/* wrist: motor board2 (pwm2) 
+servo motors 51(pin4), 52(pin5), 53(pin6), 54(pin7)
+*/
+
+void setup() {
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  Serial.println("movement of the roboy hand");
+  //pwm1.begin();
+  pwm2.begin();
+
+  // Servos run at ~50 Hz updates
+  pwm1.setPWMFreq(50);  
+  pwm2.setPWMFreq(50); 
+  yield();
+}
+
+//////////////////////////////////////////////////////////////////
+//////////////////    Movement for the wrist     /////////////////
+//////////////////    flexion_extension_wrist   ///////////////////
+//////////////////////////////////////////////////////////////////
+
+void flexion_extension_wrist(){
+  while( wrist_fe <= SERVOMAX )
+  {
+    // servo motors wrist: 51(pin4), 52(pin5), 53(pin6), 54(pin7) (pwm2 board)
+    pwm2.setPWM(7, 0, wrist_fe);   
+
+    Serial.println("flexion_extension_wrist");
+    Serial.println(wrist_fe);
+                wrist_fe+=SCHRITTWEITE; 
+       }
+}
+
+//////////////////////////////////////////////////////////////////
+//////////////////    Movement for the wrist     /////////////////
+//////////////////    extension_flexion_wrist   //////////////////
+//////////////////////////////////////////////////////////////////
+
+void extension_flexion_wrist(){
+  while( wrist_ef >= SERVOMIN )
+  {
+    // servo motors wrist: 51(pin4), 52(pin5), 53(pin6), 54(pin7) (pwm2 board)
+    pwm2.setPWM(7, 0, wrist_ef);   
+
+    Serial.println("flexion_extension_wrist");
+    Serial.println(wrist_fe);
+                wrist_fe-=SCHRITTWEITE; 
+       }
+}
+
+
+//////////////////////////////////////////////////////////////////
+//////////////////   void loop   /////////////////////////////////
+//////////////////////////////////////////////////////////////////
+void loop() {
+
+flexion_extension_wrist(); // movement of the wrist from flexion to extension
+delay(2000);
+extension_flexion_wrist(); // movement of the wrist from flexion to extension
+delay(2000);
+
+
+
+
+/*pwm2.setPWM(7,0,410);
+delay(2000);
+pwm2.setPWM(7,0,130);
+delay(2000);
+*/
+
+
+}
