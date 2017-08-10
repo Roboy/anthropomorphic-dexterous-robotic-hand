@@ -63,9 +63,9 @@ void extension_flexion_wrist(){
     // servo motors wrist: 51(pin4), 52(pin5), 53(pin6), 54(pin7) (pwm2 board)
     pwm2.setPWM(7, 0, wrist_ef);   
 
-    Serial.println("flexion_extension_wrist");
-    Serial.println(wrist_fe);
-                wrist_fe-=SCHRITTWEITE; 
+    Serial.println("extension_flexion_wrist");
+    Serial.println(wrist_ef);
+                wrist_ef-=SCHRITTWEITE; 
        }
 }
 
@@ -77,7 +77,7 @@ void loop() {
 
 flexion_extension_wrist(); // movement of the wrist from flexion to extension
 delay(2000);
-extension_flexion_wrist(); // movement of the wrist from flexion to extension
+extension_flexion_wrist(); // movement of the wrist from extension to flexion
 delay(2000);
 
 
