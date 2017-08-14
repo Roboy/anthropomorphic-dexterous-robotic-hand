@@ -3,7 +3,7 @@ This repo contains design files for fusion 360 as well as a description how to s
 
 The documentation of the Prototype 1 can be found here: https://devanthro.atlassian.net/wiki/display/R2M/Anthropomorphic+hand+for+Roboy
 
-![prototype1a](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/prototype2.jpg?raw=true)
+![prototype1a](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/prototype1a.jpg?raw=true)
 
 ## Hardware
 For the prototype1 the following hardware is used:
