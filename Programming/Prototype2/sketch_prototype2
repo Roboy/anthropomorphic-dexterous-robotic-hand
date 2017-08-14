@@ -3,7 +3,7 @@
 
 //600 is the 'maximum' pulse length count (out of 4096)
 int wrist_fe_start = 420; // movement of the wrist from flexion to extension
-int wrist_ef_start = 140; // movement of the wrist from flexion to extension
+int wrist_ef_start = 140; // movement of the wrist from extension to flexion
 int wrist_ru_start = 420;  // movement of the wrist from radial to ulnar
 int wrist_ur_start = 120; // movement of the wrist from ulnar to radial
 int neutral_position = 270; 
@@ -63,6 +63,7 @@ void neutral_position_wrist(){
 //////////////////    Movement for the wrist     /////////////////
 //////////////////    flexion_extension_wrist   //////////////////
 //////////////////////////////////////////////////////////////////
+// Movement from flexion to extension = 70°
 
 void flexion_extension_wrist(){
   int wrist_fe = wrist_fe_start;
@@ -79,7 +80,7 @@ void flexion_extension_wrist(){
     Serial.println(wrist_fe);
        wrist_fe-=SCHRITTWEITE;
        delay(10); // servo movement is reduced 
-       } while (wrist_fe >= SERVOMIN && wrist_fe<=SERVOMAX);
+  } while (wrist_fe >= SERVOMIN && wrist_fe<=SERVOMAX);
 }
 
 
@@ -87,6 +88,7 @@ void flexion_extension_wrist(){
 //////////////////    Movement for the wrist     /////////////////
 //////////////////    extension_flexion_wrist   //////////////////
 //////////////////////////////////////////////////////////////////
+// Movement from extension to flexion = 80°
 
 void extension_flexion_wrist(){
    int wrist_ef = wrist_ef_start;
@@ -103,56 +105,65 @@ void extension_flexion_wrist(){
     Serial.println(wrist_ef);
     wrist_ef+=SCHRITTWEITE;
     delay(10); // servo movement is reduced 
-       } while (wrist_ef<= SERVOMAX && wrist_ef>= SERVOMIN);  
+  } while (wrist_ef<= SERVOMAX && wrist_ef>= SERVOMIN);  
 }
 
 //////////////////////////////////////////////////////////////////
 //////////////////    Movement for the wrist     /////////////////
 //////////////////    ulnar_radial_wrist         /////////////////
 //////////////////////////////////////////////////////////////////
-//blaue Tendons
+// Movement from radial to ulnar = 20°
 
 void ulnar_radial_wrist(){
-  int wrist_ur = wrist_ur_start;
+  int wrist_ur = wrist_ur_start; // wrist_ur = 120
+  int wrist_ru = wrist_ru_start; // wrist_ru = 420
   do
   {
+    //Servo 54 und Servo 41 haben entgegengesetzte Werte!!!
     pwm2.setPWM(7, 0, wrist_ur); //54 servo motor / Pin 7
-    pwm2.setPWM(1, 0, wrist_ur); //42 servo motor / Pin 0
+    pwm2.setPWM(1, 0, wrist_ru); //42 servo motor / Pin 0
 
     // orange tendons, for movement flexion - extension
-    pwm2.setPWM(6, 0, 140); //53 servo motor / Pin 6 
-    pwm1.setPWM(8, 0, 140); //31 servo motor / Pin 8 
+    //pwm2.setPWM(6, 0, 140); //53 servo motor / Pin 6 
+    //pwm1.setPWM(8, 0, 140); //31 servo motor / Pin 8 
 
-    Serial.println("ulnar_radial_wrist");
+    Serial.println("ulnar_radial_wrist Servo 42");
     Serial.println(wrist_ur);
+    Serial.println("ulnar_radial_wrist Servo54");
+    Serial.println(wrist_ru);
        wrist_ur-=SCHRITTWEITE;
+       wrist_ru+=SCHRITTWEITE;
        delay(10); // servo movement is reduced 
-       } while (wrist_ur >= SERVOMIN && wrist_ur<=SERVOMAX); // Bereich bis 420 (SERVOMAX)
+  } while (wrist_ur >= SERVOMIN && wrist_ur<=SERVOMAX && wrist_ru >= SERVOMIN && wrist_ru <= SERVOMAX); 
 }
 
 //////////////////////////////////////////////////////////////////
 //////////////////    Movement for the wrist     /////////////////
 //////////////////    radial_ulnar_wrist        //////////////////
 //////////////////////////////////////////////////////////////////
-//blaue Tendons
+// Movement from radial to ulnar = 30°
 
 void radial_ulnar_wrist(){
-     int wrist_ru = wrist_ru_start;
+     int wrist_ru = wrist_ru_start; // wrist_ru = 420
+     int wrist_ur = wrist_ur_start; // wrist_ur = 120
    do 
   {
+    //Servo 54 und Servo 41 haben entgegengesetzte Werte!!!
     pwm2.setPWM(7, 0, wrist_ru); //54 servo motor / Pin 7
-    pwm2.setPWM(0, 0, wrist_ru); //41 servo motor / Pin 0
+    pwm2.setPWM(1, 0, wrist_ur); //42 servo motor / Pin 0
     
     // orange tendons, for movement flexion - extension
-    pwm2.setPWM(6, 0, 140); //53 servo motor / Pin 6 
-    pwm1.setPWM(8, 0, 140); //31 servo motor / Pin 8
+    //pwm2.setPWM(6, 0, 140); //53 servo motor / Pin 6 
+    //pwm1.setPWM(8, 0, 140); //31 servo motor / Pin 8
  
-    
-    Serial.println("radial_ulnar_wrist");
+    Serial.println("radial_ulnar_wrist Servo 42");
+    Serial.println(wrist_ur);
+    Serial.println("radial_ulnar_wrist Servo 54");
     Serial.println(wrist_ru);
        wrist_ru+=SCHRITTWEITE;
+       wrist_ur-=SCHRITTWEITE;
        delay(10); // servo movement is reduced 
-       } while (wrist_ru>= SERVOMIN && wrist_ru<=SERVOMAX); // Bereich bis 120 (SERVOMIN)
+  } while (wrist_ru>= SERVOMIN && wrist_ru<=SERVOMAX && wrist_ur >= SERVOMIN && wrist_ur <= SERVOMAX); 
 }
 
 //////////////////////////////////////////////////////////////////
@@ -162,26 +173,27 @@ void radial_ulnar_wrist(){
 
 void loop() {
 
-
+/*
 //movement wrist
 //flexion_extension_wrist(); // movement of the wrist from flexion to extension
 delay(2000);
 //extension_flexion_wrist(); // movement of the wrist from extension to flexion
 delay(2000);
-radial_ulnar_wrist(); // movement of the wrist from ulnar to radial
+*/
+//radial_ulnar_wrist(); // movement of the wrist from ulnar to radial
 delay(2000);
 //ulnar_radial_wrist(); // movement of the wrist from radial to ulnar
 delay(2000); 
-//neutral_position_wrist(); 
+neutral_position_wrist(); 
 delay(2000);
 
 /*
 //test for adjust the servo
-pwm2.setPWM(6,0,140);
-delay(2500);
-//pwm2.setPWM(7,0,120);
+pwm2.setPWM(7,0,120);
+pwm2.setPWM(1,0, 420);
 delay(2500);
 */
+
 
 /*pwm2.setPWM(7, 0, 270); //54
 pwm2.setPWM(0, 0, 270); //41
