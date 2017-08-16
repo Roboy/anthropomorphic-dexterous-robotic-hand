@@ -245,16 +245,48 @@ pwm2: 41(0), 42(1), 43(2), 44(3)
 //////////////////////////////////////////////////////////////////
 
 void loop() {
-    
+
+   %%inputs  
+    int d_alpha = degree...
+        int d_beta = degree...
+        int d_gamma = degree...
+
+    %%output
+     int dx4 = alpha *3/2
+
+     x_start_4=360  %% experiment bekommen
+     x_akutuell_4= x_start-dx4
+
+ int dx3 = asdasdasf afsfasf*3/2
+
+     x_start_3=360  %% experiment bekommen
+     x_akutuell_3= x_start-dx4
+
+     
+ int dx2 = asdasdasd *3asfasfd/2
+
+     x_start_2=360  %% experiment bekommen
+     x_akutuell_2= x_start-dx4
+     
+ int dx1 = sadasdasdasd *3/2
+
+     x_start_1=360  %% experiment bekommen
+     x_akutuell_1= x_start-dx4
+
+
+        
+
 
     neutral_position_wrist(); 
    
     //pwm1.setPWM(5, 0, 400);
     //delay(2000);
-    pwm1.setPWM(1, 0, 420);               //12
-    pwm1.setPWM(9, 0, 200);               //32
-    pwm2.setPWM(0, 0, 200);               // 41 servo motor / Pin 0 --> stretch MCP
-    //pwm1.setPWM(4, 0, 400);               // 21
+    pwm1.setPWM(9, 0, x_akutuell_1);               //32 servo motor / motor 1
+    pwm1.setPWM(1, 0, x_akutuell_2);               //12 motor 2
+    pwm1.setPWM(4, 0, x_akutuell_3);               // 21 / motor 3
+ 
+
+    pwm2.setPWM(0, 0, x_akutuell_4);               // 41 servo motor 4 / Pin 0 --> stretch MCP
     //delay(2000);
     //pwm1.setPWM(5, 0, 150);
     //delay(2000);
