@@ -1,14 +1,6 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
-int wrist_fe_start = 420;       // movement of the wrist from flexion to extension
-int wrist_ef_start = 140;       // movement of the wrist from extension to flexion
-int wrist_ru_start = 420;       // movement of the wrist from radial to ulnar
-int wrist_ur_start = 120;       // movement of the wrist from ulnar to radial
-int neutral_position = 270; 
-int pos1a = 270;                // value for the indexfinger
-int pos1b = 120;                // value for the indexfinger 
-
 ///////////////////////////////////////////////////////
 ///////////////////    CONSTANTS    ///////////////////
 ///////////////////////////////////////////////////////
@@ -27,6 +19,29 @@ const int SERVOMAX_beta = 310;  //corresponds to the PIP joint as well as to x_c
 const int SERVOMIN_gamma = 270; //corresponds to the MCP joint as well as to x_current_4
 const int SERVOMAX_gamma = 350; //corresponds to the MCP joint as well as to x_current_4
 
+const int wrist_fe_start = 420;       // movement of the wrist from flexion to extension
+const int wrist_ef_start = 140;       // movement of the wrist from extension to flexion
+const int wrist_ru_start = 420;       // movement of the wrist from radial to ulnar
+const int wrist_ur_start = 120;       // movement of the wrist from ulnar to radial
+const int neutral_position = 270; 
+const int pos1a = 270;                // value for the indexfinger
+const int pos1b = 120;                // value for the indexfinger 
+
+// These values were obtained by experiments. These values represents the highest stretched position of the servo motor.
+const int x_start_if_4 = 360;                     // x_4 corresponts to gamma / MCP joint
+const int x_start_if_3 = 360;                     // x_4 corresponts to beta / PIP joint
+const int x_start_if_2 = 360;                     // x_4 corresponts to alpha / DIP joint
+const int x_start_if_1 = 360;                     // x_4 corresponts to all joint
+
+//These values are obtained through calculations and experimental measurements.
+const double r_c_x4 = 3/2;
+const double r_b_x3 = 13/11;
+const double r_a_x2 = 8/7;
+
+// Put in values in degree for the finger joints:
+int delta_alpha_degree = 70;                // corresponds to the DIP joint (fingertip). Value in degree. AREA between 0 and 70 degree.
+int delta_beta_degree = 110;                // corresponds to the PIP joint. Value in degree. AREA between 0 and 110 degree.
+int delta_gamma_degree = 120;               // corresponds to the MCP joint. Value in degree. AREA between 0 and 120 degree.
 
 // There are two different adresses for the two Adafruit motor boards: pwm & pwm2
 Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40); // motor board 1 mit Servos von 11 - 35
@@ -60,50 +75,32 @@ void setup() {
 /////////    Calculations for the finger positions         ///////
 //////////////////////////////////////////////////////////////////
 
-// Put in values in degree for the finger joints:
-//Declaration in DEGREE instead of PULSELENGTH: pulselength = map(degrees, 0, 180, SERVOMIN, SERVOMAX)
-
-int delta_alpha_degree = 70;                // corresponds to the DIP joint (fingertip). Value in degree. AREA between 0 and 70 degree.
 int pulselength_alpha = map(delta_alpha_degree, 0, 180, SERVOMIN_alpha, SERVOMAX_alpha);
-
-int delta_beta_degree = 110;                // corresponds to the PIP joint. Value in degree. AREA between 0 and 110 degree.
 int pulselength_beta = map(delta_beta_degree, 0, 180, SERVOMIN_beta, SERVOMAX_beta);
-
-int delta_gamma_degree = 120;               // corresponds to the MCP joint. Value in degree. AREA between 0 and 120 degree.
 int pulselength_gamma = map(delta_gamma_degree, 0, 180, SERVOMIN_gamma, SERVOMAX_gamma);
 
-
-// These values were obtained by experiments. These values represents the highest stretched position of the servo motor.
-int x_start_if_4 = 360;                     // start values for the index finger. x_4 corresponts to gamma / MCP joint
-int x_start_if_3 = 360;                     // start values for the index finger. x_4 corresponts to beta / PIP joint
-int x_start_if_2 = 360;                     // start values for the index finger. x_4 corresponts to alpha / DIP joint
-int x_start_if_1 = 360;                     // start values for the index finger. x_4 corresponts to all joint
-
-//These values are obtained through calculations and experimental measurements.
-double r_c_x4 = 3/2;
-double r_b_x3 = 13/11;
-double r_a_x2 = 8/7;
-
-double delta_x4  (double pulselength_alpha, double r_c_x4) {
-              return (double delta_x4 = pulselength_alpha * r_c_x4);
-              return delta_x4;    
+double calc_current_4(double pulselength_alpha, double r_c_x4, int x_start_if_4) {
+              double delta_x4 = pulselength_alpha * r_c_x ;
+              double x_current_4 = x_start_if_4 - delta_x4;
+              return x_current_4;    
 }
-double x_current_4 = x_start_if_4 - delta_x4;
 
-double delta_x3  (double pulselength_beta, double r_b_x3, double delta_x4) {
-              return (-pulselength_beta * r_b_x3 - delta_x4);
-              return delta_x3;    
+double calc_current_3(double pulselength_beta, double r_b_x3, double delta_x4, int x_start_if_3) {
+              double delta_x3 = (-pulselength_beta * r_b_x3) - delta_x4;
+              double x_current_3 = x_start_if_3 - delta_x3;
+              return x_current_3;    
 }
-double x_current_3 = x_start_if_3 - delta_x3;
 
-double delta_x2 (double pulselength_gamma, double r_a_x2, double delta_x4, double delta_x3) {
-              (-pulselength_beta * r_a_x2) - 0.5 (delta_x3 + 2 * delta_x4);
-              return delta_x2;    
+double calc_current_2(double pulselength_gamma, double r_a_x2, double delta_x4, double delta_x3, int x_start_if_2) {
+              double delta_x2 = (-pulselength_beta * r_a_x2) - 0.5 (delta_x3 + 2 * delta_x4);
+              double x_current_2 = x_start_if_2 - delta_x2;
+              return x_current_2;    
 } 
-double x_current_2 = x_start_if_2 0 delta_x2;
 
-double x_current_1 = 2* x_current_2 + x_current_4 + x_current_3 + x_current_2;
-
+double calc_current_1(double x_current_4, double x_current_3, double x_current_2) {
+              double x_current_1 = 2* x_current_2 + x_current_4 + x_current_3 + x_current_2;
+              return x_current_1;    
+} 
 
 //////////////////////////////////////////////////////////////////
 //////////////////    Movement index finger          /////////////
@@ -111,9 +108,9 @@ double x_current_1 = 2* x_current_2 + x_current_4 + x_current_3 + x_current_2;
 //////////////////////////////////////////////////////////////////
 // von gestreckten in den gebeugten Zustand
 
-void stretch_flexion_indexfinger(){
+void stretch_flexion_indexfinger(const double x_current_4,const double x_current_3, const double x_current_2, const double x_current_1){
 
- while (x_current_4 <= SERVOMAX_gamma && x_current_4 >= SERVOMIN_gamma && x_current_3 <= SERVOMAX_beta && x_current_3 >= SERVOMIN_beta && x_current_2 <= SERVOMAX_alpha && x_current_2 >= SERVOMIN_alpha)
+ while (x_current_4 <= SERVOMAX_gamma && x_current_4 >= SERVOMIN_gamma || x_current_3 <= SERVOMAX_beta && x_current_3 >= SERVOMIN_beta || x_current_2 <= SERVOMAX_alpha && x_current_2 >= SERVOMIN_alpha || x_current_1 <= SERVOMAX && x_current_1 >= SERVOMIN)
    {
     pwm2.setPWM(0, 0, x_current_4);              // 41 servo motor / Pin 0 --> stretch MCP
     pwm1.setPWM(4, 0, x_current_3);              // 21 servo motor / Pin 4 --> stretch PIP 
@@ -180,16 +177,15 @@ pwm2: 41(0), 42(1), 43(2), 44(3)
 
 void neutral_position_wrist(){
 // Nullstelle wrist, 270 --> This is the position where the wrist is in a neutral position
-    int i = 1;
-    while (i<=1){
+    int neutral_position = 270; 
+   
     pwm2.setPWM(6, 0, neutral_position);               //53 servo motor / Pin 6
     pwm1.setPWM(8, 0, neutral_position);               //31 servo motor / Pin 8
     pwm2.setPWM(7, 0, neutral_position);               //54 servo motor / Pin 7
     pwm2.setPWM(1, 0, neutral_position);               //42 servo motor / Pin 0
     Serial.println("neutral position");
     Serial.println(neutral_position);
-    i++;
-    }
+  
   }
 
 //////////////////////////////////////////////////////////////////
