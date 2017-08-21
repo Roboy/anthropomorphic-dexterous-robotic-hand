@@ -6,6 +6,13 @@
 ///////////////////////////////////////////////////////
 // in pulselength: SERVOMIN: 120; SERVOMAX: 420 --> maximaler Bereich eines Servos [180,410]
 
+
+
+//These values are obtained through calculations and experimental measurements.
+const double r_c_x4 = 3/2;
+const double r_b_x3 = 13/11;
+const double r_a_x2 = 8/7;
+
 const int SERVOMIN = 140;       // this value depends on the adjustment of the servos
 const int SERVOMAX = 420;       // this value depends on the adjustment of the servos
 const int SCHRITTWEITE = 10;    // setting up the step size of the servos
@@ -14,7 +21,7 @@ const int SERVOMIN_1 = 120; //corresponds to the DIP, PIP and MCP joints
 const int SERVOMAX_1 = 420; //corresponds to the DIP, PIP and MCP joints 
 
 const int SERVOMIN_2 = 120; //corresponds to the DIP joint (fingertip) as well as to x_current_2
-const int SERVOMAX_2 = 200; //corresponds to the DIP joint (fingertip) as well as to x_current_2
+const int SERVOMAX_2 = 420; //corresponds to the DIP joint (fingertip) as well as to x_current_2
 
 const int SERVOMIN_3 = 180;  //corresponds to the PIP joint as well as to x_current_3
 const int SERVOMAX_3 = 310;  //corresponds to the PIP joint as well as to x_current_3
@@ -29,15 +36,11 @@ const int wrist_ur_start = 120;       // movement of the wrist from ulnar to rad
 const int neutral_position = 270; 
 
 // These values were obtained by experiments. These values represents the highest stretched position of the servo motor.
-const int x_start_4 = 270;                     // x_4 corresponts to gamma / MCP joint 270
-const int x_start_3 = 280;                     // x_3 corresponts to beta / PIP joint 280
-const int x_start_2 = 350;                     // x_2 corresponts to alpha / DIP joint 350
-const int x_start_1 = 420;                     // x_1 corresponts to all joint 420
+const int x_start_4 = SERVOMAX_4-120*r_c_x4;                     // x_4 corresponts to gamma / MCP joint 270
+const int x_start_3 = SERVOMAX_3-110*r_b_x3;                     // x_3 corresponts to beta / PIP joint 280
+const int x_start_2 = SERVOMAX_2-70*r_a_x2;                     // x_2 corresponts to alpha / DIP joint 350
+const int x_start_1 = SERVOMAX_1;                     // x_1 corresponts to all joint 420
 
-//These values are obtained through calculations and experimental measurements.
-const double r_c_x4 = 3/2;
-const double r_b_x3 = 13/11;
-const double r_a_x2 = 8/7;
 
 // Put in values in degree for the finger joints:
 int delta_alpha_degree = -10;                // corresponds to the DIP joint (fingertip). 70
