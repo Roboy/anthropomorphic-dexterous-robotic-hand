@@ -6,13 +6,6 @@
 ///////////////////////////////////////////////////////
 // in pulselength: SERVOMIN: 120; SERVOMAX: 420 --> maximaler Bereich eines Servos [180,410]
 
-
-
-//These values are obtained through calculations and experimental measurements.
-const double r_c_x4 = 3/2;
-const double r_b_x3 = 13/11;
-const double r_a_x2 = 8/7;
-
 const int SERVOMIN = 140;       // this value depends on the adjustment of the servos
 const int SERVOMAX = 420;       // this value depends on the adjustment of the servos
 const int SCHRITTWEITE = 10;    // setting up the step size of the servos
@@ -23,11 +16,11 @@ const int SERVOMAX_1 = 420; //corresponds to the DIP, PIP and MCP joints
 const int SERVOMIN_2 = 120; //corresponds to the DIP joint (fingertip) as well as to x_current_2
 const int SERVOMAX_2 = 420; //corresponds to the DIP joint (fingertip) as well as to x_current_2
 
-const int SERVOMIN_3 = 180;  //corresponds to the PIP joint as well as to x_current_3
-const int SERVOMAX_3 = 310;  //corresponds to the PIP joint as well as to x_current_3
+const int SERVOMIN_3 = 120;  //corresponds to the PIP joint as well as to x_current_3
+const int SERVOMAX_3 = 420;  //corresponds to the PIP joint as well as to x_current_3
 
-const int SERVOMIN_4 = 270; //corresponds to the MCP joint as well as to x_current_4
-const int SERVOMAX_4 = 350; //corresponds to the MCP joint as well as to x_current_4
+const int SERVOMIN_4 = 120; //corresponds to the MCP joint as well as to x_current_4
+const int SERVOMAX_4 = 420; //corresponds to the MCP joint as well as to x_current_4
 
 const int wrist_fe_start = 420;       // movement of the wrist from flexion to extension
 const int wrist_ef_start = 140;       // movement of the wrist from extension to flexion
@@ -35,26 +28,25 @@ const int wrist_ru_start = 420;       // movement of the wrist from radial to ul
 const int wrist_ur_start = 120;       // movement of the wrist from ulnar to radial
 const int neutral_position = 270; 
 
-// These values were obtained by experiments. These values represents the highest stretched position of the servo motor.
-const int x_start_4 = SERVOMAX_4-120*r_c_x4;                     // x_4 corresponts to gamma / MCP joint 270
-const int x_start_3 = SERVOMAX_3-110*r_b_x3;                     // x_3 corresponts to beta / PIP joint 280
-const int x_start_2 = SERVOMAX_2-70*r_a_x2;                     // x_2 corresponts to alpha / DIP joint 350
-const int x_start_1 = SERVOMAX_1;                     // x_1 corresponts to all joint 420
+//These values are obtained through calculations and experimental measurements.
+const double r_c_x4 = 1.2;
+const double r_b_x3 = 0.9;
+const double r_a_x2 = 0.8;
 
-
+/*
 // Put in values in degree for the finger joints:
-int delta_alpha_degree = -10;                // corresponds to the DIP joint (fingertip). 70
-int delta_beta_degree = -10;                // corresponds to the PIP joint. 110
-int delta_gamma_degree = -10;               // corresponds to the MCP joint. 120
+int delta_alpha_degree = 0;                // corresponds to the DIP joint (fingertip). 70
+int delta_beta_degree = 0;                // corresponds to the PIP joint. 110
+int delta_gamma_degree = 0;               // corresponds to the MCP joint. 120
+*/
+int alpha_min = 0; 
+int alpha_max = 70; 
 
-int alpha_min = -70; 
-int alpha_max = 0; 
+int beta_min = 0; 
+int beta_max = 110; 
 
-int beta_min = -110; 
-int beta_max = 0; 
-
-int gamma_min = -120; 
-int gamma_max = 0; 
+int gamma_min = -10; 
+int gamma_max = 90; 
 
 // There are two different adresses for the two Adafruit motor boards: pwm & pwm2
 Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40); // motor board 1 mit Servos von 11 - 35
@@ -94,90 +86,12 @@ void setup() {
 //int pulselength_beta = map(delta_beta_degree, 0, 180, SERVOMIN_beta, SERVOMAX_beta);
 //double pulselength_gamma = map(delta_gamma_degree, 0, 180, SERVOMIN_gamma, SERVOMAX_gamma);
 
+// These values were obtained by experiments. These values represents the highest stretched position of the servo motor.
+int x_start_4 = SERVOMAX_4 - 250 * r_c_x4;                 // x_4 corresponts to gamma / MCP joint 270
+int x_start_3 = SERVOMAX_3 - 110 *r_b_x3;                  // x_3 corresponts to beta / PIP joint 280
+int x_start_2 = SERVOMAX_2 - 70 * r_a_x2;                  // x_2 corresponts to alpha / DIP joint 350
+int x_start_1 = SERVOMAX_1;                                // x_1 corresponts to all joint 420
 
-double delta_x4 = - delta_gamma_degree * r_c_x4 ;
-double delta_x3 = (-delta_beta_degree * r_b_x3) + (delta_gamma_degree * r_c_x4); 
-double delta_x2 = (-delta_alpha_degree * r_a_x2) + (delta_beta_degree * ra_b_x3) + (delta_gamma_degree * r_c_x4);
-double delta_x1 = (delta_alpha_degree * r_a_x2) + (delta_beta_degree * r_b_x3) + (delta_gamma_degree * r_c_x4);
-
-double calc_current_4(int x_start_4, int delta_x4) {
-              double x_current_4 = x_start_4 - delta_x4; 
-              return x_current_4;   
-}
-
-double calc_current_3(int x_start_3, double delta_x3) {
-              double x_current_3 = x_start_3 - delta_x3;
-              return x_current_3;    
-}
-
-double calc_current_2(int x_start_2, double delta_x3) {
-              double x_current_2 = x_start_2 - delta_x2;
-              return x_current_2;    
-} 
-
-double calc_current_1(int x_start_1, double delta_x1) {
-              double x_current_1 = x_start_1 - delta_x1;
-              return x_current_1;    
-} 
-
-//////////////////////////////////////////////////////////////////
-//////////////////    Movement index finger          /////////////
-//////////////////    from stretch to flexion        /////////////
-//////////////////////////////////////////////////////////////////
-// von gestreckten in den gebeugten Zustand
-
-void stretch_flexion_indexfinger(double x_current_4, double x_current_3, double x_current_2, double x_current_1, int alpha_max, int alpha_min, int beta_max, int beta_min, int gamma_max, int gamma_min){
-Serial.println("TEST");
-    Serial.println("flexion indexfinger: delta_alpha_degree");
-    Serial.println(delta_alpha_degree);
-    Serial.println("flexion indexfinger: delta_beta_degree");
-    Serial.println(delta_beta_degree);
-    Serial.println("flexion indexfinger: delta_gamma_degree");
-    Serial.println(delta_gamma_degree);
-
-
- while ((delta_alpha_degree <= alpha_max && delta_alpha_degree >= alpha_min) || (delta_beta_degree <= beta_max && delta_beta_degree >= beta_min) || (delta_gamma_degree <= gamma_max && delta_gamma_degree >= gamma_min))
-   {
-    double delta_x4 = - delta_gamma_degree * r_c_x4 ;
-    double delta_x3 = (-delta_beta_degree * r_b_x3) + (delta_gamma_degree * r_c_x4); 
-    double delta_x2 = (-delta_alpha_degree * r_a_x2) + (delta_beta_degree * r_b_x3) + (delta_gamma_degree * r_c_x4);
-    double delta_x1 = (delta_alpha_degree * r_a_x2) + (delta_beta_degree * r_b_x3) + (delta_gamma_degree * r_c_x4);
-    
-    double x_current_4 = calc_current_4(x_start_4, delta_x4);
-    double x_current_3 = calc_current_3(x_start_3, delta_x3);
-    double x_current_2 = calc_current_2(x_start_2, delta_x2);
-    double x_current_1 = calc_current_1(x_start_1, delta_x1);
-    
-    pwm2.setPWM(0, 0, x_current_4);              // 41 servo motor / Pin 0 --> stretch MCP
-    pwm1.setPWM(4, 0, x_current_3);              // 21 servo motor / Pin 4 --> stretch PIP 
-    pwm1.setPWM(1, 0, x_current_2);              // 12 servo motor / Pin 1 --> stretch DIP (fingertip) 
-    pwm1.setPWM(9, 0, x_current_1);              // 32 servo motor / Pin 9 --> flexion  
-    
-    Serial.println("flexion indexfinger: x_current_4");
-    Serial.println(x_current_4);
-    Serial.println("flexion indexfinger: x_current_3");
-    Serial.println(x_current_3);
-    Serial.println("flexion indexfinger: x_current_2");
-    Serial.println(x_current_2);
-    Serial.println("flexion indexfinger: x_current_1");
-    Serial.println(x_current_1);
-
-    Serial.println("flexion indexfinger: delta_alpha_degree");
-    Serial.println(delta_alpha_degree);
-    Serial.println("flexion indexfinger: delta_beta_degree");
-    Serial.println(delta_beta_degree);
-    Serial.println("flexion indexfinger: delta_gamma_degree");
-    Serial.println(delta_gamma_degree);
-    delay(500);
-
-    delta_alpha_degree-=SCHRITTWEITE;         // x_current_2
-    delta_beta_degree-=SCHRITTWEITE;          // x_current_3
-    delta_gamma_degree-=SCHRITTWEITE;         // x_current_4
-    if ((delta_alpha_degree >= alpha_max && delta_alpha_degree <= alpha_min) || (delta_beta_degree >= beta_max || delta_beta_degree <= beta_min) || (delta_gamma_degree >= gamma_max || delta_gamma_degree <= gamma_min)){
-        break;
-        }
-    }
-}
 
 //////////////////////////////////////////////////////////////////
 //////////////////    Movement index finger          /////////////
@@ -185,24 +99,39 @@ Serial.println("TEST");
 //////////////////////////////////////////////////////////////////
 // von gebeugten Zustand in den gestreckten Zustand
 
-void flexion_stretch_indexfinger(double x_current_4, double x_current_3, double x_current_2, double x_current_1, int alpha_max, int alpha_min, int beta_max, int beta_min, int gamma_max, int gamma_min){
+void flexion_stretch_indexfinger(){ 
+int delta_alpha_degree = 0;                // corresponds to the DIP joint (fingertip).
+int delta_beta_degree = 0;                // corresponds to the PIP joint.
+int delta_gamma_degree = 0;               // corresponds to the MCP joint.
 
- while ((delta_alpha_degree < alpha_max && delta_alpha_degree > alpha_min) || (delta_beta_degree < beta_max && delta_beta_degree > beta_min) || (delta_gamma_degree < gamma_max && delta_gamma_degree > gamma_min))
-   {
+double delta_x4=0;
+double delta_x3=0;
+double delta_x2=0;
+double delta_x1=0;
+
+double x_current_4 = x_start_4 - delta_x4; 
+double x_current_3 = x_start_3 - delta_x3;
+double x_current_2 = x_start_2 - delta_x2;
+double x_current_1 = x_start_1 - delta_x1;
+    
+ while ((delta_alpha_degree <= alpha_max && delta_alpha_degree >= alpha_min)||(delta_beta_degree <= beta_max && delta_beta_degree >= beta_min)||(delta_gamma_degree <= gamma_max && delta_gamma_degree >= gamma_min)){
+
     double delta_x4 = - delta_gamma_degree * r_c_x4 ;
     double delta_x3 = (-delta_beta_degree * r_b_x3) + (delta_gamma_degree * r_c_x4); 
     double delta_x2 = (-delta_alpha_degree * r_a_x2) + (delta_beta_degree * r_b_x3) + (delta_gamma_degree * r_c_x4);
     double delta_x1 = (delta_alpha_degree * r_a_x2) + (delta_beta_degree * r_b_x3) + (delta_gamma_degree * r_c_x4);
-    
-    double x_current_4 = calc_current_4(x_start_4, delta_x4);
-    double x_current_3 = calc_current_3(x_start_3, delta_x3);
-    double x_current_2 = calc_current_2(x_start_2, delta_x2);
-    double x_current_1 = calc_current_1(x_start_1, delta_x1);
 
-    pwm2.setPWM(0, 0, x_current_4);              // 41 servo motor / Pin 0 --> stretch MCP
-    pwm1.setPWM(4, 0, x_current_3);              // 21 servo motor / Pin 4 --> stretch PIP 
-    pwm1.setPWM(1, 0, x_current_2);              // 12 servo motor / Pin 1 --> stretch DIP (fingertip) 
-    pwm1.setPWM(9, 0, x_current_1);              // 32 servo motor / Pin 9 --> flexion  
+    double x_current_4 = x_start_4 - delta_x4; 
+    double x_current_3 = x_start_3 - delta_x3;
+    double x_current_2 = x_start_2 - delta_x2;
+    double x_current_1 = x_start_1 - delta_x1;
+
+    Serial.println("stretch indexfinger: delta_alpha_degree");
+    Serial.println(delta_alpha_degree);
+    Serial.println("stretch indexfinger: delta_beta_degree");
+    Serial.println(delta_beta_degree);
+    Serial.println("stretch indexfinger: delta_gamma_degree");
+    Serial.println(delta_gamma_degree);
     
     Serial.println("stretch indexfinger: x_current_4");
     Serial.println(x_current_4);
@@ -213,24 +142,100 @@ void flexion_stretch_indexfinger(double x_current_4, double x_current_3, double 
     Serial.println("stretch indexfinger: x_current_1");
     Serial.println(x_current_1);
 
-    Serial.println("stretch indexfinger: delta_alpha_degree");
-    Serial.println(delta_alpha_degree);
-    Serial.println("stretch indexfinger: delta_beta_degree");
-    Serial.println(delta_beta_degree);
-    Serial.println("stretch indexfinger: delta_gamma_degree");
-    Serial.println(delta_gamma_degree);
-   
+    pwm2.setPWM(0, 0, x_current_4);              // 41 servo motor / Pin 0 --> stretch MCP
+    pwm1.setPWM(4, 0, x_current_3);              // 21 servo motor / Pin 4 --> stretch PIP 
+    pwm1.setPWM(1, 0, x_current_2);              // 12 servo motor / Pin 1 --> stretch DIP (fingertip) 
+    pwm1.setPWM(9, 0, x_current_1);              // 32 servo motor / Pin 9 --> flexion  
+
     delay(500);
-    delta_alpha_degree+=SCHRITTWEITE;
-    delta_beta_degree+=SCHRITTWEITE;
-    delta_gamma_degree+=SCHRITTWEITE;
+    delta_alpha_degree+=14;
+    delta_beta_degree+=22;
+    delta_gamma_degree+=20;
+    Serial.println("stretch indexfinger: delta_alpha_degree. After calc");
+    Serial.println(delta_alpha_degree);
+    Serial.println("stretch indexfinger: delta_beta_degree. After calc");
+    Serial.println(delta_beta_degree);
+    Serial.println("stretch indexfinger: delta_gamma_degree. After calc");
+    Serial.println(delta_gamma_degree);   
+   if((x_current_2 > SERVOMAX_2 || x_current_2 < SERVOMIN_2) || (x_current_3 > SERVOMAX_3 || x_current_3 < SERVOMIN_3) || (x_current_4 > SERVOMAX_4 || x_current_4 < SERVOMIN_4)){
+    break;
+    }
+}
+}
+//////////////////////////////////////////////////////////////////
+//////////////////    Movement index finger          /////////////
+//////////////////    from stretch to flexion        /////////////
+//////////////////////////////////////////////////////////////////
+// von gestreckten in den gebeugten Zustand
 
-    if ((delta_alpha_degree == alpha_max || delta_alpha_degree == alpha_min) || (delta_beta_degree == beta_max || delta_beta_degree == beta_min) || (delta_gamma_degree == gamma_max || delta_gamma_degree == gamma_min)){
-        break;
-        }
-    }  
-} 
 
+
+void stretch_flexion_indexfinger(){
+
+int delta_alpha_degree = 70;                // corresponds to the DIP joint (fingertip). 
+int delta_beta_degree = 110;                // corresponds to the PIP joint. 
+int delta_gamma_degree = 90;               // corresponds to the MCP joint. 
+
+    double delta_x4=0;
+    double delta_x3=0;
+    double delta_x2=0;
+    double delta_x1=0;
+
+double x_current_4 = x_start_4 - delta_x4; 
+double x_current_3 = x_start_3 - delta_x3;
+double x_current_2 = x_start_2 - delta_x2;
+double x_current_1 = x_start_1 - delta_x1;
+
+ while ((delta_alpha_degree <= alpha_max && delta_alpha_degree >= alpha_min)||(delta_beta_degree <= beta_max && delta_beta_degree >= beta_min)||(delta_gamma_degree <= gamma_max && delta_gamma_degree >= gamma_min)){
+
+double delta_x4 = - delta_gamma_degree * r_c_x4 ;
+double delta_x3 = (-delta_beta_degree * r_b_x3) + (delta_gamma_degree * r_c_x4); 
+double delta_x2 = (-delta_alpha_degree * r_a_x2) + (delta_beta_degree * r_b_x3) + (delta_gamma_degree * r_c_x4);
+double delta_x1 = (delta_alpha_degree * r_a_x2) + (delta_beta_degree * r_b_x3) + (delta_gamma_degree * r_c_x4);
+
+double x_current_4 = x_start_4 - delta_x4; 
+double x_current_3 = x_start_3 - delta_x3;
+double x_current_2 = x_start_2 - delta_x2;
+double x_current_1 = x_start_1 - delta_x1;
+
+    Serial.println("flexion indexfinger: delta_alpha_degree");
+    Serial.println(delta_alpha_degree);
+    Serial.println("flexion indexfinger: delta_beta_degree");
+    Serial.println(delta_beta_degree);
+    Serial.println("flexion indexfinger: delta_gamma_degree");
+    Serial.println(delta_gamma_degree);
+    
+    Serial.println("flexion indexfinger: x_current_4");
+    Serial.println(x_current_4);
+    Serial.println("flexion indexfinger: x_current_3");
+    Serial.println(x_current_3);
+    Serial.println("flexion indexfinger: x_current_2");
+    Serial.println(x_current_2);
+    Serial.println("flexion indexfinger: x_current_1");
+    Serial.println(x_current_1);
+
+    
+    pwm2.setPWM(0, 0, x_current_4);              // 41 servo motor / Pin 0 --> stretch MCP
+    pwm1.setPWM(4, 0, x_current_3);              // 21 servo motor / Pin 4 --> stretch PIP 
+    pwm1.setPWM(1, 0, x_current_2);              // 12 servo motor / Pin 1 --> stretch DIP (fingertip) 
+    pwm1.setPWM(9, 0, x_current_1);              // 32 servo motor / Pin 9 --> flexion  
+    
+    delta_alpha_degree-=14;
+    delta_beta_degree-=22;
+    delta_gamma_degree-=20;
+    Serial.println("flexion indexfinger: delta_alpha_degree. After calc");
+    Serial.println(delta_alpha_degree);
+    Serial.println("flexion indexfinger: delta_beta_degree. After calc");
+    Serial.println(delta_beta_degree);
+    Serial.println("flexion indexfinger: delta_gamma_degree. After calc");
+    Serial.println(delta_gamma_degree);
+    delay(500);
+    
+    if((x_current_2 > SERVOMAX_2 || x_current_2 < SERVOMIN_2) || (x_current_3 > SERVOMAX_3 || x_current_3 < SERVOMIN_3) || (x_current_4 > SERVOMAX_4 || x_current_4 < SERVOMIN_4)){
+    break;
+    }
+}
+}
 
 //////////////////////////////////////////////////////////////////
 //////////////////    Neutral position of the wrist     //////////
@@ -364,36 +369,52 @@ void radial_ulnar_wrist(){
 //////////////////////////////////////////////////////////////////
 
 void loop() {
-
+neutral_position_wrist();  
+    pwm2.setPWM(0, 0, 420);              // 41 servo motor / Pin 0 --> stretch MCP
+    pwm1.setPWM(4, 0, 420);              // 21 servo motor / Pin 4 --> stretch PIP 
+    pwm1.setPWM(1, 0, 420);              // 12 servo motor / Pin 1 --> stretch DIP (fingertip) 
+    pwm1.setPWM(9, 0, 420);              // 32 servo motor / Pin 9 --> flexion  
 
 //test for adjust the servo
-neutral_position_wrist();   
-
-/*
-    pwm1.setPWM(9, 0, 120);              // 32 servo motor / Pin 9 --> flexion
-    delay(2000);
-
-    pwm1.setPWM(9, 0, 200);              // 32 servo motor / Pin 9 --> flexion
-        delay(2000);
+ /*
+neutral_position_wrist();                   // middle position
+    //Ende stretch = gestreckt
+    pwm2.setPWM(0, 0, 240);              // 41 servo motor / Pin 0 --> stretch MCP
+    pwm1.setPWM(4, 0, 300);              // 21 servo motor / Pin 4 --> stretch PIP 
+    pwm1.setPWM(1, 0, 201);              // 12 servo motor / Pin 1 --> stretch DIP (fingertip) 
+    pwm1.setPWM(9, 0, 145);              // 32 servo motor / Pin 9 --> flexion  
+    delay(5000);
+    //Anfang flexion
+    pwm2.setPWM(0, 0, 228);              // 41 servo motor / Pin 0 --> stretch MCP
+    pwm1.setPWM(4, 0, 312);              // 21 servo motor / Pin 4 --> stretch PIP 
+    pwm1.setPWM(1, 0, 213);              // 12 servo motor / Pin 1 --> stretch DIP (fingertip) 
+    pwm1.setPWM(9, 0, 157);              // 32 servo motor / Pin 9 --> flexion  
+    delay(5000); 
+    //Ende flexion
+    pwm2.setPWM(0, 0, 108);              // 41 servo motor / Pin 0 --> stretch MCP
+    pwm1.setPWM(4, 0, 333);              // 21 servo motor / Pin 4 --> stretch PIP 
+    pwm1.setPWM(1, 0, 376);              // 12 servo motor / Pin 1 --> stretch DIP (fingertip) 
+    pwm1.setPWM(9, 0, 432);              // 32 servo motor / Pin 9 --> flexion  
+    delay(5000);
+    //Anfang stretch
+    pwm2.setPWM(0, 0, 120);              // 41 servo motor / Pin 0 --> stretch MCP
+    pwm1.setPWM(4, 0, 321);              // 21 servo motor / Pin 4 --> stretch PIP 
+    pwm1.setPWM(1, 0, 364);              // 12 servo motor / Pin 1 --> stretch DIP (fingertip) 
+    pwm1.setPWM(9, 0, 420);              // 32 servo motor / Pin 9 --> flexion  
+    delay(5000); 
 */
 
 //////////////////////////////////////////////////////////////////
 //////////////////   movement fingers      ///////////////////////
 //////////////////////////////////////////////////////////////////
-
+/*
 neutral_position_wrist();                   // middle position
 
-double _x_current_4 = calc_current_4(x_start_4, delta_x4);
-double _x_current_3 = calc_current_3(x_start_3, delta_x3);
-double _x_current_2 = calc_current_2(x_start_2, delta_x2);
-double _x_current_1 = calc_current_1(x_start_1, delta_x1);
-
-
-flexion_stretch_indexfinger(_x_current_4, _x_current_3, _x_current_2, _x_current_1, alpha_max, alpha_min, beta_max, beta_min, gamma_max, gamma_min);             // movement from flexion to stretch indexfinger
+flexion_stretch_indexfinger();             // movement from flexion to stretch indexfinger
 delay(2000);
-stretch_flexion_indexfinger(_x_current_4, _x_current_3, _x_current_2, _x_current_1, alpha_max, alpha_min, beta_max, beta_min, gamma_max, gamma_min);              // movement from stretch to flexion indexfinger
+stretch_flexion_indexfinger();              // movement from stretch to flexion indexfinger
 delay(2000);
-
+*/
 //////////////////////////////////////////////////////////////////
 //////////////////   movement wrist        ///////////////////////
 //////////////////////////////////////////////////////////////////
