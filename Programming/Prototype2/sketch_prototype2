@@ -53,7 +53,7 @@ int gamma_max = 90;
 Adafruit_PWMServoDriver pwm1 = Adafruit_PWMServoDriver(0x40); // motor board 1 mit Servos von 11 - 35
 Adafruit_PWMServoDriver pwm2 = Adafruit_PWMServoDriver(0x41); // motor board 1 mit Servos von 41 - 55
 
-/* 
+  /*
 Assignement of the servo motors (left arm) --> Number Servo motor (corresponding Pin)
 
 pwm1: 11(0), 12(1), 13(2), 14(3)
@@ -61,7 +61,7 @@ pwm1: 11(0), 12(1), 13(2), 14(3)
       31(8), 32(9), 33(10), 34(11)
 
 pwm2: 41(0), 42(1), 43(2), 44(3)
-      51(5), 52(6), 53(7), 54(8)
+      51(4), 52(5), 53(6), 54(7)
 */
 
 void setup() {
@@ -120,13 +120,19 @@ void flexion_stretch_indexfinger(){
     Serial.println(x_current_2);
     Serial.println("flexion indexfinger: x_current_1");
     Serial.println(x_current_1);
-
+     //Thumb
+    pwm2.setPWM(2, 0, x_current_4);               // 43 servo motor / Pin 2 --> stretch MCP
+    pwm1.setPWM(10, 0, x_current_3);              // 33 servo motor / Pin 10 --> stretch PIP 
+    pwm1.setPWM(2, 0, x_current_2);               // 13 servo motor / Pin 6 --> stretch DIP (fingertip) 
+    pwm1.setPWM(3, 0, x_current_1);               // 14 servo motor / Pin 3 --> flexion
+    pwm2.setPWM(3, 0, 270);                      // 44 servo motor / Pin 3 --> left/right
+    delay(10);
+    //Index finger
     pwm2.setPWM(0, 0, x_current_4);              // 41 servo motor / Pin 0 --> stretch MCP
     pwm1.setPWM(4, 0, x_current_3);              // 21 servo motor / Pin 4 --> stretch PIP 
     pwm1.setPWM(1, 0, x_current_2);              // 12 servo motor / Pin 1 --> stretch DIP (fingertip) 
     pwm1.setPWM(9, 0, x_current_1);              // 32 servo motor / Pin 9 --> flexion  
     pwm1.setPWM(5, 0, 270);                      // 22 servo motor / Pin 5 --> left/right
-
     delay(60);
     delta_alpha+=14;
     delta_beta+=22;
@@ -189,18 +195,25 @@ void stretch_flexion_indexfinger(){
     Serial.println(x_current_2);
     Serial.println("flexion indexfinger: x_current_1");
     Serial.println(x_current_1);
-    
+     //Thumb
+    pwm2.setPWM(2, 0, x_current_4);               // 43 servo motor / Pin 2 --> stretch MCP
+    pwm1.setPWM(10, 0, x_current_3);              // 33 servo motor / Pin 10 --> stretch PIP 
+    pwm1.setPWM(2, 0, x_current_2);               // 13 servo motor / Pin 6 --> stretch DIP (fingertip) 
+    pwm1.setPWM(3, 0, x_current_1);               // 14 servo motor / Pin 3 --> flexion
+    pwm2.setPWM(3, 0, 270);                      // 44 servo motor / Pin 3 --> left/right
+    delay(10);
+    //Index finger
     pwm2.setPWM(0, 0, x_current_4);              // 41 servo motor / Pin 0 --> stretch MCP
     pwm1.setPWM(4, 0, x_current_3);              // 21 servo motor / Pin 4 --> stretch PIP 
     pwm1.setPWM(1, 0, x_current_2);              // 12 servo motor / Pin 1 --> stretch DIP (fingertip) 
     pwm1.setPWM(9, 0, x_current_1);              // 32 servo motor / Pin 9 --> flexion 
     pwm1.setPWM(5, 0, 270);                      // 22 servo motor / Pin 5 --> left/right 
-    
+    delay(60);
     delta_alpha-=14;
     delta_beta-=22;
     delta_gamma-=20;
     Serial.println("flexion indexfinger: delta_alpha. After calc");
-    Serial.println(delta_alpha);
+    Serial.println();
     Serial.println("flexion indexfinger: delta_beta. After calc");
     Serial.println(delta_beta);
     Serial.println("flexion indexfinger: delta_gamma. After calc");
@@ -212,7 +225,6 @@ void stretch_flexion_indexfinger(){
     }
 }
 }
-
 //////////////////////////////////////////////////////////////////
 //////////////////    Movement index finger           ////////////
 //////////////////    from left to right              ////////////
@@ -234,7 +246,49 @@ int x_current_5 = 200;
 }
 }
 //////////////////////////////////////////////////////////////////
+//////////////////    Movement THUMB                  ////////////
+//////////////////    from right to left              ////////////
+//////////////////////////////////////////////////////////////////
+// von rechts nach links (nach außen)
+
+void right_left_thumb(){ 
+int x_current_5 = 400;
+ while (x_current_5 <= 400 && x_current_5 >= 150){
+    Serial.println("left indexfinger: x_current_5");
+    Serial.println(x_current_5);
+     //Thumb
+    pwm2.setPWM(2, 0, 420);               // 43 servo motor / Pin 2 --> stretch MCP
+    pwm1.setPWM(10, 0, 279);              // 33 servo motor / Pin 10 --> stretch PIP 
+    pwm1.setPWM(2, 0, 137);               // 13 servo motor / Pin 6 --> stretch DIP (fingertip) 
+    pwm1.setPWM(3, 0, 145);               // 14 servo motor / Pin 3 --> flexion
+    pwm2.setPWM(3, 0, x_current_5);      // 44 servo motor / Pin 3 --> left/right
+    delay(10);   
+    x_current_5-=5;
+}
+}
+
+//////////////////////////////////////////////////////////////////
 //////////////////    Movement index finger           ////////////
+//////////////////    from left to right              ////////////
+//////////////////////////////////////////////////////////////////
+// von links nach rechts (nach innen)
+
+void left_right_thumb(){ 
+int x_current_5 = 200;
+ while (x_current_5 <= 400 && x_current_5 >= 150){
+    Serial.println("right indexfinger: x_current_5");
+    Serial.println(x_current_5);
+    pwm2.setPWM(2, 0, 420);               // 43 servo motor / Pin 2 --> stretch MCP
+    pwm1.setPWM(10, 0, 279);              // 33 servo motor / Pin 10 --> stretch PIP 
+    pwm1.setPWM(2, 0, 137);               // 13 servo motor / Pin 6 --> stretch DIP (fingertip) 
+    pwm1.setPWM(3, 0, 145);               // 14 servo motor / Pin 3 --> flexion
+    pwm2.setPWM(3, 0, x_current_5);      // 44 servo motor / Pin 3 --> left/right
+    delay(10);   
+    x_current_5+=5;
+}
+}
+//////////////////////////////////////////////////////////////////
+//////////////////    Movement THUMB                  ////////////
 //////////////////    from right to left              ////////////
 //////////////////////////////////////////////////////////////////
 // von rechts nach links (nach außen)
@@ -260,7 +314,7 @@ int x_current_5 = 400;
 
 void neutral_position_wrist(){
 // Nullstelle wrist, 270 --> This is the position where the wrist is in a neutral position
-    int neutral_position = 270; 
+    int neutral_position = 300; 
    
     pwm2.setPWM(6, 0, neutral_position);               //53 servo motor / Pin 6
     pwm1.setPWM(8, 0, neutral_position);               //31 servo motor / Pin 8
@@ -386,13 +440,24 @@ void radial_ulnar_wrist(){
 
 void loop() {
   /*
-neutral_position_wrist();  
-    pwm2.setPWM(0, 0, 300);              // 41 servo motor / Pin 0 --> stretch MCP
-    pwm1.setPWM(4, 0, 300);              // 21 servo motor / Pin 4 --> stretch PIP 
-    pwm1.setPWM(1, 0, 300);              // 12 servo motor / Pin 1 --> stretch DIP (fingertip) 
-    pwm1.setPWM(9, 0, 420);              // 32 servo motor / Pin 9 --> flexion  
-*/
 //test for adjust the servo
+    neutral_position_wrist();  
+    pwm1.setPWM(7, 0, 300);               // 52 servo motor / Pin 6 --> stretch MCP
+    pwm1.setPWM(11, 0, 450);               // 44 servo motor / Pin 3 --> stretch MCP
+    //pwm1.setPWM(10, 0, 300);              // 33 servo motor / Pin 10 --> stretch PIP 
+    //pwm1.setPWM(2, 0,300);               // 13 servo motor / Pin 6 --> stretch DIP (fingertip) 
+    //pwm1.setPWM(3, 0, 300);               // 14 servo motor / Pin 3 --> flexion
+    //pwm2.setPWM(3, 0, 270);                      // 44 servo motor / Pin 3 --> left/right  
+  /*
+Assignement of the servo motors (left arm) --> Number Servo motor (corresponding Pin)
+
+pwm1: 11(0), 12(1), 13(2), 14(3)
+      21(4), 22(5), 23(6), 24(7)
+      31(8), 32(9), 33(10), 34(11)
+
+pwm2: 41(0), 42(1), 43(2), 44(3)
+      51(4), 52(5), 53(6), 54(7)
+*/
 
 //////////////////////////////////////////////////////////////////
 //////////////////   movement fingers      ///////////////////////
@@ -401,15 +466,19 @@ neutral_position_wrist();
 neutral_position_wrist();                   // middle position
 
 flexion_stretch_indexfinger();             // movement from flexion to stretch indexfinger
-delay(2000);
+delay(3000);
 stretch_flexion_indexfinger();              // movement from stretch to flexion indexfinger
-delay(2000);
+delay(3000);
 flexion_stretch_indexfinger();             // movement from flexion to stretch indexfinger
-delay(2000);
+delay(3000);
 left_right_indexfinger();
+left_right_thumb();
 delay(2000);
 right_left_indexfinger();
+right_left_thumb();
 delay(2000);
+
+
 
 //////////////////////////////////////////////////////////////////
 //////////////////   movement wrist        ///////////////////////
