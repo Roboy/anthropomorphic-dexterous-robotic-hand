@@ -1,4 +1,4 @@
-# anthropomorphic-hand-prototype2
+# Anthropomorphic-hand-prototype2
 This repo contains design files for fusion 360 as well as a description how to set up the Arduino and the Adafruit motorboard for the hand (prototype2).
 
 The documentation of the Prototype 2 can be found here: https://devanthro.atlassian.net/wiki/display/R2M/Anthropomorphic+hand+for+Roboy
