@@ -128,7 +128,7 @@ Up to 16 servos can be attached to one board.
 ## Chaining drivers
 Multiple Drivers (up to 62) can be chained to control still more servos. With headers at both
 ends of the board, the wiring is as simple as connecting a 6-pin parallel
-cable (http://adafru.it/206) from one board to the next. In our case we use 2 motor boards for controlling 25 servo motors. 
+cable (http://adafru.it/206) from one board to the next. In our case we use 2 motor boards for controlling 20 servo motors. 
 
 ![Chaining Drivers](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/Chaining%20Drivers.JPG?raw=true)
 
