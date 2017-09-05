@@ -107,7 +107,7 @@ rechargeable cells.
 It is not a good idea to use the Arduino 5v pin to power your servos. Electrical noise and
 'brownouts' from excess current draw can cause your Arduino to act erratically, reset and/or
 overheat.
-We use the following power for 25 servos: 5A, 10A (https://www.amazon.de/gp/product/B00KETLBAU/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
+We use the following power for 20 servos: 5A, 10A (https://www.amazon.de/gp/product/B00KETLBAU/ref=oh_aui_detailpage_o00_s00?ie=UTF8&psc=1)
 
 ## Connecting a Servo motor
 
