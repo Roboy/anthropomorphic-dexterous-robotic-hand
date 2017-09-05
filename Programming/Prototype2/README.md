@@ -1,19 +1,19 @@
 # anthropomorphic-hand-prototype2
-This repo contains design files for fusion 360 as well as a description how to set up the Arduino and the Adafruit motorboard for the hand (prototype1).
+This repo contains design files for fusion 360 as well as a description how to set up the Arduino and the Adafruit motorboard for the hand (prototype2).
 
-The documentation of the Prototype 1 can be found here: https://devanthro.atlassian.net/wiki/display/R2M/Anthropomorphic+hand+for+Roboy
+The documentation of the Prototype 2 can be found here: https://devanthro.atlassian.net/wiki/display/R2M/Anthropomorphic+hand+for+Roboy
 
-![prototype1a](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/prototype1a.jpg?raw=true)
+![prototype2](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/prototype2.jpg?raw=true)
 
 ## Hardware
-For the prototype1 the following hardware is used:
+For the prototype2 the following hardware is used:
 ```
-- Robotic hand (3D printed)
 - Genuino 101 (power supply via laptop)
-- 2 Adafruit 16-Channel 12-bit PWM Servo Driver, 
-- A power supply (5V, 10A) for the motorboards
-- DC jack 2,1 x 5,5 mm adapter with screw terminal for the power supply﻿
-- 25 servos (TowerPro, Micro Servo SG90).
+- 2 Adafruit 16-Channel 12-bit PWM Servo Driver,
+- A power supply (5V, 10A) for the motor boards.
+- DC jack 2,1 x 5,5 mm adapter with screw terminal for the power supply
+- 20 Hitec Midi-Servo HS-81 Analog-Servo
+- 3D printed hand including the wrist.
 ```
 # Building from source
 The following instructions guide you through the process of building this repo from source.
@@ -152,16 +152,10 @@ There is also a great tutorial on how to install the library:
 http://learn.adafruit.com/adafruit-all-about-arduino-libraries-install-use (http://adafru.it/aYM)
 
 # Upload the Code
-Upload the Code for the movement of the 5 Fingers: "first_prototype_5fingers.ino" to the Arduino. 
-https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Programming/Prototype1/first_prototype_5fingers.ino
+Upload the Code for the movement of the 5 Fingers: "sketch_prototype2.ino" to the Arduino. 
+https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Programming/Prototype2/sketch_prototype2
 
 ### Verify/Compile 
 Checks your sketch for errors compiling it; it will report memory usage for code and variables in the console area.
 ### Upload 
 Compiles and loads the binary file onto the configured board through the configured Port.
-
-
-# Experimental setup
-In the picture below you can see the experimental setup of the prototype 1. Further description of the experimental setup can be found on the following link: https://devanthro.atlassian.net/wiki/display/R2M/Anthropomorphic+hand+for+Roboy
-
-![prototype1](https://github.com/Roboy/anthropomorphic-dexterous-robotic-hand/blob/master/Documentation/images/for%20descriptions/prototype1.jpg?raw=true)
