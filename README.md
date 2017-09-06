@@ -5,13 +5,14 @@ The human hand has a very delicate and complex structure. This allows muscles an
 
 ## Current challenges & scope for the future work:
 The prototype 1 was only a test prototype for Roboy and the prototype 2 is more compact with a better design in comparison to the prototype 1.
-To make the robotic hand adaptable to the Roboy 2.0 hand-arm system and being preciser, the following points will be considered: 
-The design should look more human like. 
-The new tendon routing should help to increase the precision of the fingers. 
-Since the space for the motors is limited, the new robotic hand should have a resonable degree of fredom. 
-A mathematical model to simulate the tendon driven hand.
-Another servo motor (with more power) has to be selected to increase the gripping force of the hand. 
-To control the wrist a sensor system is necessary (sensor angle measurement).
+To make the robotic hand adaptable to the Roboy 2.0 hand-arm system, the following points were considered: 
+
+        The design have to look more human like. 
+        The new tendon routing have to support the precision of the fingers. 
+        Since the space for the motors is limited, the new robotic hand should have a reasonable degree of freedom. 
+        A Simulation of a mathematical model for the tendon driven hand have to be created.
+        Another servo motor (with more power) has to be selected in order to increase the gripping force of the hand. 
+        To control the wrist a sensor system is necessary (sensor angle measurement).
 
 ### Prototype 1
 The prototype 1 was developed independently from Roboy to test the design of five tendon driven fingers with the servo system driven by 25 motors. 
@@ -23,7 +24,7 @@ The prototype 1 was developed independently from Roboy to test the design of fiv
 
 
 ### Prototype 2
-The prototype 2 is being developed (June 2017) so that it can be adapted into Roboy 2.0. The prototype 2 has 20 servo motors which will be integrated in Roboy´s new arm (Documentation: https://devanthro.atlassian.net/wiki/display/R2M/Arms). The new design of Roboy´s hand will be more humanlike and an additional wrist will be developed. The new tendon routing is improving the precision in comparison to the old robotic hand. Furthermore, a sensor system on the wrist will be implemented.
+The second prototype was developed in order to adapt it into Roboy 2.0 (SS 2017). The second prototype has 20 servo motors which will be integrated in Roboy´s new arm (Documentation: https://devanthro.atlassian.net/wiki/display/R2M/Arms). The new design of Roboy´s hand will be more humanlike and an additional wrist was developed. The new tendon routing improved the precision in comparison to the old robotic hand. Furthermore, a sensor system on the wrist will be implemented.
 
 #### Useful links
 - The documentation of the Prototype 2 can be found here: https://devanthro.atlassian.net/wiki/display/R2M/Anthropomorphic+hand+for+Roboy
