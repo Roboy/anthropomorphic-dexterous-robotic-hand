@@ -7,12 +7,12 @@ The human hand has a very delicate and complex structure. This allows muscles an
 The prototype 1 was only a test prototype for Roboy and the prototype 2 is more compact with a better design in comparison to the prototype 1.
 To make the robotic hand adaptable to the Roboy 2.0 hand-arm system, the following points were considered: 
 
-        The design have to look more human like. 
-        The new tendon routing have to support the precision of the fingers. 
-        Since the space for the motors is limited, the new robotic hand should have a reasonable degree of freedom. 
-        A Simulation of a mathematical model for the tendon driven hand have to be created.
-        Another servo motor (with more power) has to be selected in order to increase the gripping force of the hand. 
-        To control the wrist a sensor system is necessary (sensor angle measurement).
+        - The design have to look more human like. 
+        - The new tendon routing have to support the precision of the fingers. 
+        - Since the space for the motors is limited, the new robotic hand should have a reasonable degree of freedom. 
+        - A Simulation of a mathematical model for the tendon driven hand have to be created.
+        - Another servo motor (with more power) has to be selected in order to increase the gripping force of the hand. 
+        - To control the wrist a sensor system is necessary (sensor angle measurement).
 
 ### Prototype 1
 The prototype 1 was developed independently from Roboy to test the design of five tendon driven fingers with the servo system driven by 25 motors. 
